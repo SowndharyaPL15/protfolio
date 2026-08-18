@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 250" width="100%" height="100%">
+  <rect width="400" height="250" fill="#f5ebd9"/>
+  <ellipse cx="200" cy="220" rx="160" ry="20" fill="#d9cbb4" opacity="0.6"/>
+  
+  <!-- Factory silhouette -->
+  <path d="M 80 180 L 80 110 L 120 130 L 120 110 L 160 130 L 160 110 L 200 130 L 200 180 Z" fill="#d9cbb4" stroke="#a4775b" stroke-width="4"/>
+  <rect x="210" y="70" width="25" height="110" fill="#d9cbb4" stroke="#a4775b" stroke-width="4"/>
+  <path d="M 215 70 Q 200 50 205 30" stroke="#777" stroke-width="3" fill="none" stroke-linecap="round"/>
+  
+  <!-- AI Neural Brain node overlay (Cognitive Brain) -->
+  <circle cx="280" cy="100" r="8" fill="#39d353" stroke="#333" stroke-width="2"/>
+  <circle cx="320" cy="80" r="10" fill="#a4775b" stroke="#333" stroke-width="2"/>
+  <circle cx="320" cy="130" r="6" fill="#a4775b" stroke="#333" stroke-width="2"/>
+  <circle cx="350" cy="105" r="8" fill="#39d353" stroke="#333" stroke-width="2"/>
+  
+  <line x1="280" y1="100" x2="320" y2="80" stroke="#333" stroke-width="2"/>
+  <line x1="280" y1="100" x2="320" y2="130" stroke="#333" stroke-width="2"/>
+  <line x1="320" y1="80" x2="350" y2="105" stroke="#333" stroke-width="2"/>
+  <line x1="320" y1="130" x2="350" y2="105" stroke="#333" stroke-width="2"/>
+  <line x1="320" y1="80" x2="320" y2="130" stroke="#333" stroke-width="2"/>
+  
+  <!-- Gear overlay -->
+  <circle cx="280" cy="150" r="20" fill="none" stroke="#a4775b" stroke-width="6" stroke-dasharray="10 5"/>
+  <circle cx="280" cy="150" r="10" fill="none" stroke="#a4775b" stroke-width="4"/>
+</svg>

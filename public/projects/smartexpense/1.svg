@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 250" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg3" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0e2a47"/>
+      <stop offset="100%" stop-color="#051526"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="250" fill="url(#bg3)"/>
+  
+  <!-- Standing Smartphone Mockup -->
+  <rect x="135" y="15" width="130" height="220" rx="18" fill="#1e293b" stroke="#00b4d8" stroke-width="3"/>
+  <rect x="143" y="28" width="114" height="194" rx="10" fill="#023e8a"/>
+  
+  <!-- App Bar inside phone -->
+  <rect x="148" y="38" width="104" height="26" rx="4" fill="#0077b6" opacity="0.8"/>
+  <circle cx="162" cy="51" r="6" fill="#90e0ef"/>
+  
+  <!-- Multi-colored Pie Chart inside phone -->
+  <circle cx="200" cy="115" r="36" fill="transparent" stroke="#ffb703" stroke-width="22" stroke-dasharray="62 165" stroke-dashoffset="0"/>
+  <circle cx="200" cy="115" r="36" fill="transparent" stroke="#fb8500" stroke-width="22" stroke-dasharray="52 175" stroke-dashoffset="-62"/>
+  <circle cx="200" cy="115" r="36" fill="transparent" stroke="#00b4d8" stroke-width="22" stroke-dasharray="72 155" stroke-dashoffset="-114"/>
+  <circle cx="200" cy="115" r="36" fill="transparent" stroke="#2a9d8f" stroke-width="22" stroke-dasharray="41 186" stroke-dashoffset="-186"/>
+  <circle cx="200" cy="115" r="15" fill="#023e8a"/>
+</svg>

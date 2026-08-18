@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 250" width="100%" height="100%">
+  <rect width="400" height="250" fill="#f5ebd9"/>
+  <ellipse cx="200" cy="220" rx="160" ry="20" fill="#d9cbb4" opacity="0.6"/>
+  <!-- Wheelchair Patient (Woman sitting left) -->
+  <circle cx="120" cy="175" r="26" fill="none" stroke="#333" stroke-width="5"/>
+  <circle cx="120" cy="175" r="18" fill="none" stroke="#777" stroke-width="2"/>
+  <path d="M 100 120 L 120 120 L 120 170 L 150 170" stroke="#333" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 100 120 C 100 95, 136 95, 136 120 L 132 165 L 102 165 Z" fill="#e06d53"/>
+  <circle cx="118" cy="78" r="16" fill="#d4976a"/>
+  <path d="M 102 78 C 102 55, 134 55, 134 85 Z" fill="#1a1a1a"/>
+  <path d="M 125 118 Q 155 125 178 132" stroke="#d4976a" stroke-width="7" stroke-linecap="round" fill="none"/>
+
+  <!-- Caregiver (Woman sitting right) -->
+  <path d="M 245 130 L 275 130 L 275 195 M 245 165 L 245 195" stroke="#333" stroke-width="5" stroke-linecap="round" fill="none"/>
+  <path d="M 220 120 C 220 95, 256 95, 256 120 L 252 175 L 222 175 Z" fill="#408ab4"/>
+  <circle cx="238" cy="78" r="16" fill="#e8b088"/>
+  <path d="M 222 78 C 222 55, 254 55, 254 85 Z" fill="#2b1810"/>
+  <path d="M 230 118 Q 200 125 178 132" stroke="#e8b088" stroke-width="7" stroke-linecap="round" fill="none"/>
+</svg>

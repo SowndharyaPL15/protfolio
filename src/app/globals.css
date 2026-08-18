@@ -1,0 +1,402 @@
+@import "tailwindcss";
+
+/* =====================================================
+   THEME TOKENS – 4 themes, switched via data-theme
+   ===================================================== */
+
+:root {
+  --accent-primary:    #A4775B; /* Accent */
+  --accent-secondary:  #B8A99A; /* Taupe */
+  --accent-tertiary:   #D8C7B8; /* Soft Nude */
+  --bg-base:           #F5F1EA; /* Primary background */
+  --bg-surface:        #EDE5DB; /* Secondary background */
+  --bg-panel:          #EDE5DB;
+  --bg-card:           #FBF9F5; /* Cards background */
+  --bg-card-solid:     #FBF9F5;
+  --bg-input:          #EDE5DB;
+  --text-main:         #29231F; /* Dark brown */
+  --text-muted:        #756A61; /* Secondary text */
+  --glow-xs:           rgba(164, 119, 91, 0.04);
+  --glow-sm:           rgba(164, 119, 91, 0.08);
+  --glow-md:           rgba(164, 119, 91, 0.15);
+  --border-subtle:     #D9CEC3; /* Borders */
+  --border-accent:     #B8A99A;
+  --gradient-primary:  linear-gradient(135deg, #B8A99A, #A4775B);
+  --grid-line:         rgba(164, 119, 91, 0.02);
+  --scrollbar-thumb:   #B8A99A;
+  --scrollbar-hover:   #A4775B;
+  --github-level-0:    #d5c9ba;
+  --github-level-1:    #9be9a8;
+  --github-level-2:    #40c463;
+  --github-level-3:    #30a14e;
+  --github-level-4:    #216e39;
+  --progress-track:    rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="dark"] {
+  --accent-primary:    #D8C7B8; /* Soft Nude as highlight in dark mode */
+  --accent-secondary:  #B8A99A; /* Taupe */
+  --accent-tertiary:   #A4775B; /* Accent */
+  --bg-base:           #29231F; /* Dark brown background */
+  --bg-surface:        #3E352F; /* Deep brown surface */
+  --bg-panel:          #3E352F;
+  --bg-card:           rgba(62, 53, 47, 0.85);
+  --bg-card-solid:     #3E352F;
+  --bg-input:          #29231F;
+  --text-main:         #F5F1EA; /* Cream text */
+  --text-muted:        #B8A99A; /* Taupe text */
+  --glow-xs:           rgba(216, 199, 184, 0.04);
+  --glow-sm:           rgba(216, 199, 184, 0.08);
+  --glow-md:           rgba(216, 199, 184, 0.15);
+  --border-subtle:     #3E352F;
+  --border-accent:     #B8A99A;
+  --gradient-primary:  linear-gradient(135deg, #A4775B, #D8C7B8);
+  --grid-line:         rgba(216, 199, 184, 0.02);
+  --scrollbar-thumb:   #B8A99A;
+  --scrollbar-hover:   #D8C7B8;
+  --github-level-0:    #161b22;
+  --github-level-1:    #0e4429;
+  --github-level-2:    #006d32;
+  --github-level-3:    #26a641;
+  --github-level-4:    #39d353;
+  --progress-track:    rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="light"] {
+  /* Inherits light tokens from :root */
+}
+
+/* =====================================================
+   TAILWIND V4 THEME TOKENS
+   ===================================================== */
+@theme {
+  --font-space:          "Space Mono", monospace;
+  --font-serif-display:  "DM Serif Display", serif;
+  --font-sans:           "DM Sans", sans-serif;
+}
+
+/* =====================================================
+   BASE STYLES
+   ===================================================== */
+:root {
+  scroll-behavior: smooth;
+  color-scheme: dark;
+}
+
+html {
+  background-color: var(--bg-base);
+}
+
+body {
+  background-color: var(--bg-base);
+  color: var(--text-main);
+  font-family: "DM Sans", sans-serif;
+  overflow: hidden;
+  transition: background-color 0.4s ease, color 0.3s ease;
+}
+
+/* Grid overlay */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+  z-index: 0;
+  transition: background-image 0.4s ease;
+}
+
+/* =====================================================
+   SCROLLBAR
+   ===================================================== */
+::-webkit-scrollbar        { width: 4px; height: 4px; }
+::-webkit-scrollbar-track  { background: var(--bg-base); }
+::-webkit-scrollbar-thumb  { background: var(--scrollbar-thumb); border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: var(--scrollbar-hover); }
+
+/* =====================================================
+   CORE COMPONENT CLASSES  (theme-aware)
+   ===================================================== */
+.cyber-panel {
+  background:       var(--bg-card);
+  backdrop-filter:  blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border:           1px solid var(--border-subtle);
+  box-shadow:       0 0 15px var(--glow-xs);
+  transition:       border-color 0.2s ease, box-shadow 0.2s ease, background 0.3s ease;
+}
+.cyber-panel-glow {
+  border-color: var(--border-accent) !important;
+  box-shadow:   0 0 30px var(--glow-sm), 0 0 60px var(--glow-xs) !important;
+}
+
+.cyber-button {
+  transition:  all 0.2s ease-in-out;
+  border:      1px solid var(--border-subtle);
+}
+.cyber-button:hover {
+  background:   var(--glow-xs);
+  border-color: var(--accent-primary);
+  box-shadow:   0 0 12px var(--glow-sm);
+  color:        var(--accent-primary);
+}
+
+/* =====================================================
+   GLOW & ACCENT UTILITIES
+   ===================================================== */
+.text-glow       { text-shadow: 0 0 10px var(--glow-md); color: var(--accent-primary); }
+.text-glow-green { text-shadow: 0 0 8px rgba(57, 255, 20, 0.5); color: #39ff14; }
+.text-accent     { color: var(--accent-primary); }
+.text-accent-2   { color: var(--accent-secondary); }
+.text-muted-accent { color: var(--text-muted); }
+.border-theme    { border-color: var(--border-subtle); }
+.border-theme-accent { border-color: var(--border-accent); }
+.bg-theme-card   { background: var(--bg-card); }
+.bg-theme-xs     { background: var(--glow-xs); }
+.bg-theme-sm     { background: var(--glow-sm); }
+.gradient-primary { background: var(--gradient-primary); }
+
+/* =====================================================
+   KEYFRAME ANIMATIONS
+   ===================================================== */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-8px); }
+}
+@keyframes float-reverse {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50%      { transform: translateY(8px) rotate(180deg); }
+}
+@keyframes pulse-slow {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.35; }
+}
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+@keyframes spin-slow-reverse {
+  from { transform: rotate(360deg); }
+  to   { transform: rotate(0deg); }
+}
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 0 10px var(--glow-xs); }
+  50%      { box-shadow: 0 0 30px var(--glow-md), 0 0 60px var(--glow-sm); }
+}
+@keyframes shimmer {
+  0%   { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+@keyframes scan-line {
+  0%   { top: -2px; }
+  100% { top: 100%; }
+}
+@keyframes flicker {
+  0%, 95%, 100% { opacity: 1; }
+  96%           { opacity: 0.4; }
+  97%           { opacity: 1; }
+  98%           { opacity: 0.6; }
+}
+@keyframes counter-up {
+  from { transform: translateY(10px); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes typing-cursor {
+  0%, 100% { border-color: var(--accent-primary); }
+  50%       { border-color: transparent; }
+}
+@keyframes boot-bar {
+  from { width: 0%; }
+  to   { width: 100%; }
+}
+
+/* Animation classes */
+.animate-float          { animation: float 4s ease-in-out infinite; }
+.animate-float-reverse  { animation: float-reverse 6s ease-in-out infinite; }
+.animate-pulse-slow     { animation: pulse-slow 3s ease-in-out infinite; }
+.animate-spin-slow      { animation: spin-slow 12s linear infinite; }
+.animate-spin-slow-rev  { animation: spin-slow-reverse 18s linear infinite; }
+.animate-glow-pulse     { animation: glow-pulse 2.5s ease-in-out infinite; }
+.animate-shimmer        { animation: shimmer 2s linear infinite; }
+.animate-flicker        { animation: flicker 5s ease-in-out infinite; }
+.animate-fade-up        { animation: fade-up 0.6s ease-out forwards; }
+.animate-fade-in        { animation: fade-in 0.4s ease-out forwards; }
+
+/* Staggered delays */
+.delay-100  { animation-delay: 0.1s; }
+.delay-200  { animation-delay: 0.2s; }
+.delay-300  { animation-delay: 0.3s; }
+.delay-400  { animation-delay: 0.4s; }
+.delay-500  { animation-delay: 0.5s; }
+
+/* =====================================================
+   CARD TILT & HOVER EFFECTS
+   ===================================================== */
+.card-tilt {
+  transform-style: preserve-3d;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  will-change: transform;
+}
+
+.card-tilt-inner {
+  transform: translateZ(10px);
+}
+
+/* =====================================================
+   PROJECT IMAGE CAROUSEL
+   ===================================================== */
+.project-image-wrap {
+  position: relative;
+  overflow: hidden;
+  border-radius: 6px;
+}
+.project-image-wrap::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    transparent 50%,
+    rgba(2, 7, 19, 0.85) 100%
+  );
+  pointer-events: none;
+}
+.project-image-wrap img {
+  transition: transform 0.4s ease;
+}
+.project-image-wrap:hover img {
+  transform: scale(1.06);
+}
+
+/* =====================================================
+   RADAR CHART
+   ===================================================== */
+.radar-chart-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+/* =====================================================
+   SKILL PROGRESS BAR ANIMATION
+   ===================================================== */
+.skill-bar-fill {
+  animation: shimmer 2.5s ease-in-out infinite;
+  background-size: 200% 100%;
+}
+
+/* =====================================================
+   SCAN LINE (decorative)
+   ===================================================== */
+.scan-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent-primary), transparent);
+  opacity: 0.5;
+  animation: scan-line 3s linear infinite;
+  pointer-events: none;
+}
+
+/* =====================================================
+   GLASS MORPHISM OVERLAY
+   ===================================================== */
+.glass {
+  background:           rgba(255, 255, 255, 0.03);
+  backdrop-filter:      blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border:               1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* =====================================================
+   ACCESSIBILITY – FOCUS STATES
+   ===================================================== */
+*:focus-visible {
+  outline:        2px solid var(--accent-primary);
+  outline-offset: 3px;
+  border-radius:  4px;
+}
+
+button:focus-visible,
+a:focus-visible {
+  outline:        2px solid var(--accent-primary);
+  outline-offset: 2px;
+}
+
+/* Skip-to-content link */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  padding: 8px 16px;
+  background: var(--accent-primary);
+  color: var(--bg-base);
+  z-index: 9999;
+  font-size: 12px;
+  font-family: "Space Mono", monospace;
+  transition: top 0.2s;
+}
+.skip-link:focus { top: 0; }
+
+/* =====================================================
+   REDUCED MOTION
+   ===================================================== */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration:        0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration:       0.01ms !important;
+    scroll-behavior:           auto !important;
+  }
+}
+
+/* =====================================================
+   MOBILE SIDEBAR OVERLAY
+   ===================================================== */
+.sidebar-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  z-index: 19;
+}
+
+/* Line clamp utility */
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* =====================================================
+   HIDE NEXT.JS DEV ERROR OVERLAY BADGE
+   ===================================================== */
+nextjs-portal,
+#nextjs-dev-overlay,
+[data-nextjs-toast],
+[data-nextjs-toast-wrapper],
+[data-nextjs-dialog-overlay] {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}

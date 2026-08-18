@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 250" width="100%" height="100%">
+  <rect width="400" height="250" fill="#f5ebd9"/>
+  <ellipse cx="200" cy="220" rx="160" ry="20" fill="#d9cbb4" opacity="0.6"/>
+  
+  <!-- Left Link Anchor -->
+  <rect x="90" y="90" width="80" height="40" rx="20" fill="none" stroke="#a4775b" stroke-width="8" transform="rotate(-30 130 110)"/>
+  
+  <!-- Right Link Anchor -->
+  <rect x="230" y="90" width="80" height="40" rx="20" fill="none" stroke="#a4775b" stroke-width="8" transform="rotate(-30 270 110)"/>
+  
+  <!-- Link Center Connector -->
+  <line x1="170" y1="130" x2="230" y2="95" stroke="#a4775b" stroke-width="8" stroke-linecap="round"/>
+  
+  <!-- Scissors (URL Shortening symbol) -->
+  <path d="M 160 70 L 240 150 M 160 150 L 240 70" stroke="#333" stroke-width="6" stroke-linecap="round"/>
+  <circle cx="150" cy="60" r="15" fill="none" stroke="#333" stroke-width="6"/>
+  <circle cx="150" cy="160" r="15" fill="none" stroke="#333" stroke-width="6"/>
+</svg>

@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 250" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg6" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#050e1a"/>
+      <stop offset="100%" stop-color="#02060d"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="250" fill="url(#bg6)"/>
+  
+  <!-- Outer Reticle Brackets -->
+  <path d="M 100 45 L 125 45 M 100 45 L 100 70" stroke="#00f5d4" stroke-width="3.5" stroke-linecap="round"/>
+  <path d="M 300 45 L 275 45 M 300 45 L 300 70" stroke="#00f5d4" stroke-width="3.5" stroke-linecap="round"/>
+  <path d="M 100 195 L 125 195 M 100 195 L 100 170" stroke="#00f5d4" stroke-width="3.5" stroke-linecap="round"/>
+  <path d="M 300 195 L 275 195 M 300 195 L 300 170" stroke="#00f5d4" stroke-width="3.5" stroke-linecap="round"/>
+
+  <!-- 3D Glass Cube -->
+  <g transform="translate(145, 65)">
+    <polygon points="55,0 110,27 55,54 0,27" fill="#00b4d8" opacity="0.6" stroke="#00f5d4" stroke-width="2"/>
+    <polygon points="0,27 55,54 55,120 0,93" fill="#0077b6" opacity="0.6" stroke="#00f5d4" stroke-width="2"/>
+    <polygon points="110,27 55,54 55,120 110,93" fill="#03045e" opacity="0.6" stroke="#00f5d4" stroke-width="2"/>
+    <!-- Glowing Inner Core -->
+    <polygon points="55,22 82,35 55,48 28,35" fill="#ffffff"/>
+    <polygon points="28,35 55,48 55,80 28,67" fill="#90e0ef"/>
+    <polygon points="82,35 55,48 55,80 82,67" fill="#48cae4"/>
+  </g>
+</svg>
