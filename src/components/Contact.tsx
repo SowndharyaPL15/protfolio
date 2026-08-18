@@ -192,7 +192,7 @@ export default function Contact() {
           Accept: "application/json",
         },
         body: JSON.stringify({
-          access_key: "b425f74d-bd58-4563-b04e-47741404ee41", // Replace with your Web3Forms access key
+          access_key: process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY || "b425f74d-bd58-4563-b04e-47741404ee41",
           name: formData.name,
           email: formData.email,
           subject: formData.subject || "Portfolio Contact",
