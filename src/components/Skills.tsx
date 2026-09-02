@@ -227,16 +227,16 @@ export function SkillsOverview() {
         </span>
       </div>
 
-      <div className="flex flex-row items-center gap-4 flex-grow min-h-0">
+      <div className="flex flex-col sm:flex-row items-center gap-4 flex-grow min-h-0">
         {/* Progress bars */}
-        <div className="flex-1 space-y-3 pr-2 min-w-0">
+        <div className="w-full sm:flex-1 space-y-3 pr-0 sm:pr-2 min-w-0">
           {HIGHLIGHT_SKILLS.map((skill) => (
             <SkillBar key={skill.name} name={skill.name} value={skill.value} />
           ))}
         </div>
 
         {/* Radar chart */}
-        <div className="w-[200px] h-[200px] flex-shrink-0 flex items-center justify-center">
+        <div className="w-[180px] h-[180px] sm:w-[200px] sm:h-[200px] flex-shrink-0 flex items-center justify-center">
           <RadarChart />
         </div>
       </div>

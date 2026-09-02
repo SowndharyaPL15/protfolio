@@ -145,19 +145,19 @@ export default function HomeWorkspace({ setActiveTab, setSelectedProjectNum }: H
   const go = (tab: string) => setActiveTab && setActiveTab(tab);
 
   return (
-    <div className="h-full w-full overflow-y-auto p-2 md:p-3 flex flex-col gap-2" style={{ scrollbarWidth: "none" }}>
+    <div className="h-full w-full overflow-y-auto p-2 md:p-3 flex flex-col gap-2.5" style={{ scrollbarWidth: "thin" }}>
 
       {/* ===== ROW 1: HERO + SKILLS OVERVIEW ===== */}
-      <div className="flex gap-2" style={{ minHeight: "190px", flexShrink: 0 }}>
+      <div className="flex flex-col lg:flex-row gap-2.5 flex-shrink-0">
 
         {/* Hero Panel */}
-        <div className="flex-1 cyber-panel rounded-xl p-4 flex relative overflow-hidden">
+        <div className="flex-1 cyber-panel rounded-xl p-4 flex flex-col sm:flex-row relative overflow-hidden">
           <div className="flex-1 flex flex-col justify-center z-10">
             <div className="flex items-center gap-2 mb-1">
               <span className="text-2xl">👋</span>
               <span className="font-space text-xs" style={{ color: "var(--text-muted)" }}>Hi, I&apos;m</span>
             </div>
-            <h1 className="text-3xl md:text-4xl font-bold mb-1">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-1">
               <span className="text-glow">Sowndharya</span>{" "}
               <span style={{ color: "var(--text-main)" }}>P.L.</span>
             </h1>
@@ -168,19 +168,19 @@ export default function HomeWorkspace({ setActiveTab, setSelectedProjectNum }: H
             <p className="text-xs mb-3 max-w-sm leading-relaxed" style={{ color: "var(--text-muted)" }}>
               Building scalable, user-centric applications with a passion for clean code and meaningful experiences.
             </p>
-            <div className="flex items-center gap-3 mb-3">
+            <div className="flex flex-wrap items-center gap-2.5 mb-3">
               <a href="/SOWNDHARYA RESUME.pdf" download
-                className="flex items-center gap-2 px-4 py-2 rounded font-space text-xs font-bold text-white hover:scale-105 transition-transform"
+                className="flex items-center gap-2 px-3.5 py-1.5 rounded font-space text-xs font-bold text-white hover:scale-105 transition-transform"
                 style={{ background: "var(--gradient-primary)" }}>
                 Download Resume ↓
               </a>
               <button onClick={() => go("contact")}
-                className="flex items-center gap-2 px-4 py-2 rounded font-space text-xs font-bold transition-colors hover:bg-[var(--glow-sm)]"
+                className="flex items-center gap-2 px-3.5 py-1.5 rounded font-space text-xs font-bold transition-colors hover:bg-[var(--glow-sm)]"
                 style={{ border: "1px solid var(--border-subtle)" }}>
                 Contact Me ✉
               </button>
             </div>
-            <div className="flex items-center gap-5 text-[10px] font-space" style={{ color: "var(--text-muted)" }}>
+            <div className="flex flex-wrap items-center gap-4 text-[10px] font-space" style={{ color: "var(--text-muted)" }}>
               <a href="https://github.com/SowndharyaPL15" target="_blank" rel="noreferrer" className="flex items-center gap-1 transition-colors hover:opacity-80">
                 <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" /></svg>
                 GitHub
@@ -197,19 +197,19 @@ export default function HomeWorkspace({ setActiveTab, setSelectedProjectNum }: H
               </a>
             </div>
           </div>
-          <div className="hidden md:block w-56 h-full relative flex-shrink-0">
+          <div className="hidden sm:block w-40 md:w-48 lg:w-56 h-36 sm:h-full relative flex-shrink-0 self-center">
             <HolographicOrb />
           </div>
         </div>
 
         {/* Skills Overview */}
-        <div className="w-80 cyber-panel rounded-xl p-3 flex flex-col overflow-hidden flex-shrink-0">
+        <div className="w-full lg:w-80 cyber-panel rounded-xl p-3 flex flex-col overflow-hidden flex-shrink-0">
           <div className="flex items-center justify-between mb-2">
             <span className="font-space text-[9px] tracking-widest uppercase font-bold" style={{ color: "var(--text-muted)" }}>Skills Overview</span>
-            <span className="font-space text-[8px]" style={{ color: "var(--accent-primary)" }}>All Skills</span>
+            <button onClick={() => go("skills")} className="font-space text-[8px] hover:underline" style={{ color: "var(--accent-primary)" }}>All Skills →</button>
           </div>
-          <div className="flex flex-1 gap-2 overflow-hidden">
-            <div className="flex-1 flex flex-col justify-center space-y-1">
+          <div className="flex flex-col sm:flex-row lg:flex-col xl:flex-row gap-3 overflow-hidden">
+            <div className="flex-1 flex flex-col justify-center space-y-1.5">
               {SKILLS.map((skill) => (
                 <div key={skill.name}>
                   <div className="flex justify-between font-space text-[8px] mb-0.5">
@@ -222,7 +222,7 @@ export default function HomeWorkspace({ setActiveTab, setSelectedProjectNum }: H
                 </div>
               ))}
             </div>
-            <div className="w-28 flex items-center justify-center flex-shrink-0">
+            <div className="w-28 sm:w-32 lg:w-28 h-28 sm:h-32 lg:h-28 mx-auto flex items-center justify-center flex-shrink-0">
               <RadarChart />
             </div>
           </div>
@@ -230,7 +230,7 @@ export default function HomeWorkspace({ setActiveTab, setSelectedProjectNum }: H
       </div>
 
       {/* ===== ROW 2: STAT CARDS ===== */}
-      <div className="grid grid-cols-6 gap-2" style={{ minHeight: "60px", flexShrink: 0 }}>
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2 flex-shrink-0">
         {[
           { icon: "🚀", v: "8", l: "Projects Completed", c: "var(--accent-primary)" },
           { icon: "</>", v: "15+", l: "Technologies Mastered", c: "var(--accent-secondary)" },
@@ -239,7 +239,7 @@ export default function HomeWorkspace({ setActiveTab, setSelectedProjectNum }: H
           { icon: "🎓", v: "2023-2027", l: "Academic Journey", c: "var(--accent-secondary)" },
           { icon: "⭐", v: "8.35", l: "CGPA (SEM-6)", c: "var(--accent-tertiary)" },
         ].map((s, i) => (
-          <div key={i} className="cyber-panel rounded-lg flex items-center gap-2 p-2 hover:bg-[var(--glow-sm)] transition-colors">
+          <div key={i} className="cyber-panel rounded-lg flex items-center gap-2 p-2.5 hover:bg-[var(--glow-sm)] transition-colors">
             <div className="w-7 h-7 rounded border flex items-center justify-center text-xs flex-shrink-0"
               style={{ borderColor: s.c, color: s.c, background: "var(--glow-xs)" }}>
               {s.icon}
@@ -253,12 +253,12 @@ export default function HomeWorkspace({ setActiveTab, setSelectedProjectNum }: H
       </div>
 
       {/* ===== ROW 3: ABOUT + TIMELINE + PROJECTS + EDU/EXP ===== */}
-      <div className="flex gap-2" style={{ minHeight: "200px", flexShrink: 0 }}>
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-12 gap-2.5 flex-shrink-0">
 
         {/* About Me */}
-        <div className="w-44 cyber-panel rounded-xl p-3 flex flex-col overflow-hidden flex-shrink-0">
+        <div className="md:col-span-1 xl:col-span-3 cyber-panel rounded-xl p-3 flex flex-col overflow-hidden">
           <span className="font-space text-[9px] tracking-widest uppercase font-bold mb-2" style={{ color: "var(--text-muted)" }}>About Me</span>
-          <p className="text-[9px] leading-relaxed flex-1" style={{ color: "var(--text-muted)" }}>
+          <p className="text-[10px] leading-relaxed flex-1" style={{ color: "var(--text-muted)" }}>
             I am a Computer Science and Engineering student with Honours in Blockchain Technology at Dr. N.G.P Institute of Technology. I enjoy developing AI-powered applications, full-stack web platforms, and intelligent software solutions that solve real-world problems.
           </p>
           <div className="space-y-1 text-[8px] font-space pt-2 mt-2" style={{ borderTop: "1px solid var(--border-subtle)" }}>
@@ -277,9 +277,9 @@ export default function HomeWorkspace({ setActiveTab, setSelectedProjectNum }: H
         </div>
 
         {/* Journey Timeline */}
-        <div className="w-44 cyber-panel rounded-xl p-3 flex flex-col overflow-hidden flex-shrink-0">
+        <div className="md:col-span-1 xl:col-span-3 cyber-panel rounded-xl p-3 flex flex-col overflow-hidden">
           <span className="font-space text-[9px] tracking-widest uppercase font-bold mb-2" style={{ color: "var(--text-muted)" }}>Journey Timeline</span>
-          <div className="relative pl-3 space-y-2 flex-1" style={{ borderLeft: "2px solid var(--border-subtle)" }}>
+          <div className="relative pl-3 space-y-2.5 flex-1" style={{ borderLeft: "2px solid var(--border-subtle)" }}>
             {[
               { y: "2023", t: "Started B.E Computer Science Engineering", c: "var(--accent-primary)" },
               { y: "2024", t: "Developed CuraNet Caregiver Support System", c: "var(--accent-secondary)" },
@@ -297,68 +297,44 @@ export default function HomeWorkspace({ setActiveTab, setSelectedProjectNum }: H
         </div>
 
         {/* Featured Projects */}
-        <div className="flex-1 cyber-panel rounded-xl p-3 flex flex-col overflow-hidden">
+        <div className="md:col-span-2 xl:col-span-3 cyber-panel rounded-xl p-3 flex flex-col overflow-hidden">
           <div className="flex items-center justify-between mb-2">
             <span className="font-space text-[9px] tracking-widest uppercase font-bold" style={{ color: "var(--text-muted)" }}>Featured Projects</span>
             <button onClick={() => go("projects")} className="font-space text-[8px] hover:underline" style={{ color: "var(--accent-primary)" }}>View All Projects →</button>
           </div>
-          <div className="grid grid-cols-3 gap-2 flex-1 overflow-hidden">
+          <div className="grid grid-cols-1 sm:grid-cols-3 xl:grid-cols-1 gap-2 flex-1 overflow-hidden">
             {PROJECTS.filter(p => ["Project 03", "Project 05", "Project 06"].includes(p.num)).map((p, i) => (
               <div key={i} onClick={() => { if (setSelectedProjectNum) setSelectedProjectNum(p.num); go("projects"); }}
-                className="group cyber-panel rounded-xl cursor-pointer p-2 flex flex-col justify-between transition-all hover:border-[var(--accent-primary)] hover:shadow-[0_0_12px_rgba(0,199,183,0.2)]"
+                className="group cyber-panel rounded-lg cursor-pointer p-2 flex flex-col justify-between transition-all hover:border-[var(--accent-primary)] hover:shadow-[0_0_12px_rgba(0,199,183,0.2)]"
                 style={{ border: "1px solid var(--border-subtle)" }}>
                 
-                {/* Thumbnail Image Container */}
-                <div className="w-full rounded-lg overflow-hidden h-20 relative mb-1.5 border border-[var(--border-subtle)]" style={{ background: "var(--bg-surface)" }}>
-                  <img
-                    src={p.img}
-                    alt={p.name}
-                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                    onError={(e) => {
-                      (e.target as HTMLImageElement).style.display = "none";
-                    }}
-                  />
-                </div>
-
                 {/* Title & Subtitle */}
-                <div className="px-0.5">
+                <div className="px-0.5 mb-1 flex items-center justify-between">
                   <div className="font-space text-[9px] font-bold text-main leading-tight line-clamp-1 group-hover:text-[var(--accent-primary)] transition-colors">{p.name}</div>
-                  <div className="font-space text-[7.5px] text-[var(--text-muted)] line-clamp-1 mb-1.5">{p.desc}</div>
+                  <span className="font-space text-[7px] text-[var(--accent-primary)]">{p.num}</span>
                 </div>
+                <div className="font-space text-[8px] text-[var(--text-muted)] line-clamp-1 mb-1.5">{p.desc}</div>
 
                 {/* Tech Badges (Pills) */}
-                <div className="flex flex-wrap gap-1 px-0.5 mb-2">
-                  {p.tech.map((t, j) => (
+                <div className="flex flex-wrap gap-1 px-0.5">
+                  {p.tech.slice(0, 3).map((t, j) => (
                     <span key={j} className="font-space text-[6.5px] px-1.5 py-0.5 rounded-full border border-[rgba(0,199,183,0.3)] bg-[rgba(0,199,183,0.1)] text-[var(--accent-primary)] font-medium">
                       {t}
                     </span>
                   ))}
                 </div>
-
-                {/* Action Icons (External Link & GitHub) */}
-                <div className="flex items-center justify-around pt-1.5 border-t border-[rgba(255,255,255,0.06)] text-[var(--text-muted)] group-hover:text-main">
-                  <button onClick={(e) => { e.stopPropagation(); if (setSelectedProjectNum) setSelectedProjectNum(p.num); go("projects"); }} className="hover:text-[var(--accent-primary)] transition-colors" title="View Details">
-                    <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="1.8" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" /></svg>
-                  </button>
-                  {p.github && (
-                    <a href={p.github} target="_blank" rel="noreferrer" onClick={(e) => e.stopPropagation()} className="hover:text-[var(--accent-primary)] transition-colors" title="GitHub Repository">
-                      <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" /></svg>
-                    </a>
-                  )}
-                </div>
-
               </div>
             ))}
           </div>
         </div>
 
         {/* Education & Experience */}
-        <div className="w-52 cyber-panel rounded-xl p-3 flex flex-col overflow-y-auto flex-shrink-0" style={{ scrollbarWidth: "none" }}>
+        <div className="md:col-span-2 xl:col-span-3 cyber-panel rounded-xl p-3 flex flex-col overflow-hidden">
           <div className="flex items-center justify-between mb-2">
             <span className="font-space text-[9px] tracking-widest uppercase font-bold" style={{ color: "var(--text-muted)" }}>Education & Experience</span>
             <button onClick={() => go("education")} className="font-space text-[8px] hover:underline" style={{ color: "var(--accent-primary)" }}>View All →</button>
           </div>
-          <div className="font-space text-[8px] space-y-2">
+          <div className="font-space text-[8px] space-y-2 overflow-y-auto" style={{ scrollbarWidth: "none" }}>
             <div className="font-bold uppercase tracking-wider" style={{ color: "var(--text-muted)" }}>Education</div>
             {[
               { t: "B.E. Computer Science & Engineering", s: "Dr. N.G.P. Institute of Technology | 2023-2027 | CGPA: 8.35 (SEM-6)", c: "var(--accent-secondary)" },
@@ -378,11 +354,7 @@ export default function HomeWorkspace({ setActiveTab, setSelectedProjectNum }: H
               <div className="w-4 h-4 rounded border flex items-center justify-center flex-shrink-0" style={{ borderColor: "var(--accent-primary)", fontSize: "9px" }}>💼</div>
               <div>
                 <div className="font-bold" style={{ color: "var(--accent-primary)" }}>Software Development Intern</div>
-                <div style={{ color: "var(--text-muted)" }}>Mist Software Solutions, Coimbatore | 2025 - 15 Days</div>
-                <ul className="list-disc pl-3 mt-1 space-y-0.5" style={{ color: "var(--text-muted)" }}>
-                  <li>Built responsive UI (HTML, CSS, JS, Bootstrap)</li>
-                  <li>Worked with relational databases and CRUD operations.</li>
-                </ul>
+                <div style={{ color: "var(--text-muted)" }}>Mist Software Solutions | 2025 - 15 Days</div>
               </div>
             </div>
           </div>
@@ -390,7 +362,7 @@ export default function HomeWorkspace({ setActiveTab, setSelectedProjectNum }: H
       </div>
 
       {/* ===== ROW 4: CERTS + GITHUB ACTIVITY + TECH STACK ===== */}
-      <div className="grid grid-cols-3 gap-2" style={{ minHeight: "110px", flexShrink: 0 }}>
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-2.5 flex-shrink-0">
 
         {/* Certifications & Achievements */}
         <div className="cyber-panel rounded-xl p-3 flex flex-col overflow-hidden">
@@ -398,7 +370,7 @@ export default function HomeWorkspace({ setActiveTab, setSelectedProjectNum }: H
             <span className="font-space text-[9px] tracking-widest uppercase font-bold" style={{ color: "var(--text-muted)" }}>Certifications & Achievements</span>
             <button onClick={() => go("certificates")} className="font-space text-[8px] hover:underline" style={{ color: "var(--accent-primary)" }}>View All →</button>
           </div>
-          <div className="grid grid-cols-2 gap-2 flex-1">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 flex-1">
             <div className="rounded p-2 flex items-center gap-2 hover:border-[var(--accent-secondary)] transition-colors" style={{ border: "1px solid var(--border-subtle)", background: "var(--bg-input)" }}>
               <span className="text-xl">🌟</span>
               <div>
@@ -439,66 +411,68 @@ export default function HomeWorkspace({ setActiveTab, setSelectedProjectNum }: H
                 </div>
               </div>
             </div>
-            <div className="flex-1 overflow-hidden flex flex-col justify-between">
-              {/* Month Labels Header */}
-              <div className="relative w-full h-3 mb-1">
-                {getHeaderMonths().map((m, idx) => (
-                  <div
-                    key={idx}
-                    className="absolute font-space text-[5.5px]"
-                    style={{
-                      left: `${(m.index / 53) * 100}%`,
-                      color: "var(--text-muted)",
-                      transform: "translateX(-50%)"
-                    }}
-                  >
-                    {m.label}
-                  </div>
-                ))}
-              </div>
-              
-              {/* Heatmap Grid */}
-              <div className="flex flex-col gap-[1px]">
-                {Array.from({ length: 7 }).map((_, ri) => {
-                  const dayLabel = ri === 1 ? "Mon" : ri === 3 ? "Wed" : ri === 5 ? "Fri" : "";
-                  return (
-                    <div key={ri} className="flex items-center gap-[2px]">
-                      <div className="font-space text-[5px] w-3 flex-shrink-0 text-left" style={{ color: "var(--text-muted)", height: "5px", lineHeight: "5px" }}>
-                        {dayLabel}
-                      </div>
-                      <div className="flex gap-[1px] flex-1">
-                        {Array.from({ length: 53 }).map((_, ci) => {
-                          const level = getContributionLevel(ri, ci);
-                          let bg = "rgba(255, 255, 255, 0.05)"; // Empty tile color
-                          if (level === 1) bg = "#0e4429";
-                          else if (level === 2) bg = "#006d32";
-                          else if (level === 3) bg = "#26a641";
-                          else if (level === 4) bg = "#39d353";
-                          return (
-                            <div
-                              key={ci}
-                              className="flex-1 h-[5px] rounded-sm"
-                              style={{ background: bg }}
-                            />
-                          );
-                        })}
-                      </div>
+            <div className="flex-1 overflow-x-auto pb-1 flex flex-col justify-between" style={{ scrollbarWidth: "thin" }}>
+              <div className="min-w-[280px]">
+                {/* Month Labels Header */}
+                <div className="relative w-full h-3 mb-1">
+                  {getHeaderMonths().map((m, idx) => (
+                    <div
+                      key={idx}
+                      className="absolute font-space text-[5.5px]"
+                      style={{
+                        left: `${(m.index / 53) * 100}%`,
+                        color: "var(--text-muted)",
+                        transform: "translateX(-50%)"
+                      }}
+                    >
+                      {m.label}
                     </div>
-                  );
-                })}
-              </div>
-              
-              {/* Footer Legend */}
-              <div className="flex items-center justify-between mt-1 text-[5px] font-space" style={{ color: "var(--text-muted)" }}>
-                <span>Learn how we count contributions</span>
-                <div className="flex items-center gap-[2px]">
-                  <span>Less</span>
-                  <div className="w-[5px] h-[5px] rounded-sm" style={{ background: "rgba(255, 255, 255, 0.05)" }} />
-                  <div className="w-[5px] h-[5px] rounded-sm" style={{ background: "#0e4429" }} />
-                  <div className="w-[5px] h-[5px] rounded-sm" style={{ background: "#006d32" }} />
-                  <div className="w-[5px] h-[5px] rounded-sm" style={{ background: "#26a641" }} />
-                  <div className="w-[5px] h-[5px] rounded-sm" style={{ background: "#39d353" }} />
-                  <span>More</span>
+                  ))}
+                </div>
+                
+                {/* Heatmap Grid */}
+                <div className="flex flex-col gap-[1px]">
+                  {Array.from({ length: 7 }).map((_, ri) => {
+                    const dayLabel = ri === 1 ? "Mon" : ri === 3 ? "Wed" : ri === 5 ? "Fri" : "";
+                    return (
+                      <div key={ri} className="flex items-center gap-[2px]">
+                        <div className="font-space text-[5px] w-3 flex-shrink-0 text-left" style={{ color: "var(--text-muted)", height: "5px", lineHeight: "5px" }}>
+                          {dayLabel}
+                        </div>
+                        <div className="flex gap-[1px] flex-1">
+                          {Array.from({ length: 53 }).map((_, ci) => {
+                            const level = getContributionLevel(ri, ci);
+                            let bg = "rgba(255, 255, 255, 0.05)";
+                            if (level === 1) bg = "#0e4429";
+                            else if (level === 2) bg = "#006d32";
+                            else if (level === 3) bg = "#26a641";
+                            else if (level === 4) bg = "#39d353";
+                            return (
+                              <div
+                                key={ci}
+                                className="flex-1 h-[5px] rounded-sm"
+                                style={{ background: bg }}
+                              />
+                            );
+                          })}
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+                
+                {/* Footer Legend */}
+                <div className="flex items-center justify-between mt-1 text-[5px] font-space" style={{ color: "var(--text-muted)" }}>
+                  <span>Counted contributions</span>
+                  <div className="flex items-center gap-[2px]">
+                    <span>Less</span>
+                    <div className="w-[5px] h-[5px] rounded-sm" style={{ background: "rgba(255, 255, 255, 0.05)" }} />
+                    <div className="w-[5px] h-[5px] rounded-sm" style={{ background: "#0e4429" }} />
+                    <div className="w-[5px] h-[5px] rounded-sm" style={{ background: "#006d32" }} />
+                    <div className="w-[5px] h-[5px] rounded-sm" style={{ background: "#26a641" }} />
+                    <div className="w-[5px] h-[5px] rounded-sm" style={{ background: "#39d353" }} />
+                    <span>More</span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -506,7 +480,7 @@ export default function HomeWorkspace({ setActiveTab, setSelectedProjectNum }: H
         </div>
 
         {/* Tech Stack */}
-        <div className="cyber-panel rounded-xl p-3 flex flex-col overflow-hidden">
+        <div className="md:col-span-2 xl:col-span-1 cyber-panel rounded-xl p-3 flex flex-col overflow-hidden">
           <div className="flex items-center justify-between mb-2">
             <span className="font-space text-[9px] tracking-widest uppercase font-bold" style={{ color: "var(--text-muted)" }}>Tech Stack</span>
             <button onClick={() => go("skills")} className="font-space text-[8px] hover:underline" style={{ color: "var(--accent-primary)" }}>View All →</button>

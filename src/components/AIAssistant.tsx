@@ -215,8 +215,8 @@ export default function AIAssistant() {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.88, y: 16 }}
             transition={{ type: "spring", stiffness: 380, damping: 28 }}
-            className="fixed bottom-6 right-6 z-50 w-80 md:w-96 flex flex-col"
-            style={{ height: "500px" }}
+            className="fixed bottom-3 right-3 left-3 sm:left-auto sm:right-6 sm:bottom-6 z-50 w-auto sm:w-96 flex flex-col"
+            style={{ height: "min(500px, 78vh)" }}
           >
             <div
               className="rounded-xl flex flex-col h-full overflow-hidden"

@@ -129,9 +129,19 @@
     .hamburger {
       display: none;
       flex-direction: column;
-      gap: 5px;
+      gap: 6px;
       cursor: pointer;
-      padding: 4px;
+      padding: 8px;
+      border-radius: 8px;
+      background: transparent;
+      border: 1px solid transparent;
+      transition: all .25s ease;
+      z-index: 101;
+    }
+
+    .hamburger:hover {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: var(--border);
     }
 
     .hamburger span {
@@ -139,7 +149,21 @@
       height: 2px;
       background: var(--text);
       border-radius: 2px;
-      transition: all .3s;
+      transition: transform .3s ease, opacity .3s ease;
+      display: block;
+    }
+
+    .hamburger.open span:nth-child(1) {
+      transform: translateY(8px) rotate(45deg);
+    }
+
+    .hamburger.open span:nth-child(2) {
+      opacity: 0;
+      transform: scaleX(0);
+    }
+
+    .hamburger.open span:nth-child(3) {
+      transform: translateY(-8px) rotate(-45deg);
     }
 
     #hero {
@@ -1076,64 +1100,322 @@
       transform: translateY(0);
     }
 
+    .timeline-content h3 a,
+    .intern-header h3 a,
+    .cert-card h3 a,
+    .contact-item .ci-value,
+    .contact-item a {
+      word-break: break-word;
+      overflow-wrap: anywhere;
+    }
+
+    /* ── RESPONSIVE DESIGN SYSTEM ── */
+
+    /* TABLETS (iPad, Tablet portrait/landscape: ≤ 1024px) */
+    @media (max-width: 1024px) {
+      section {
+        padding: 80px 5%;
+      }
+
+      .projects-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 22px;
+      }
+
+      .skills-container {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+      }
+
+      .softskills-row {
+        gap: 20px;
+      }
+
+      .soft-card {
+        min-width: 140px;
+        padding: 30px 24px;
+      }
+    }
+
+    /* MOBILE PHONES (≤ 768px) */
     @media (max-width: 768px) {
+      nav {
+        padding: 14px 5%;
+      }
+
       .nav-links {
         display: none;
         flex-direction: column;
         position: absolute;
-        top: 70px;
+        top: 100%;
         left: 0;
         right: 0;
-        background: rgba(10, 10, 15, 0.97);
-        padding: 24px 5%;
-        gap: 20px;
+        background: rgba(10, 10, 15, 0.96);
+        backdrop-filter: blur(24px) saturate(180%);
+        padding: 24px 6%;
+        gap: 18px;
         border-bottom: 1px solid var(--border);
+        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
+        transform: translateY(-8px);
+        opacity: 0;
+        pointer-events: none;
+        transition: transform .25s ease, opacity .25s ease;
       }
 
       .nav-links.open {
         display: flex;
+        transform: translateY(0);
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      .nav-links a {
+        font-size: 0.95rem;
+        padding: 6px 0;
       }
 
       .hamburger {
         display: flex;
       }
 
-      .projects-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .certs-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .intern-card {
-        padding: 28px 24px;
-      }
-
-      .objective-card {
-        padding: 32px 24px;
-      }
-
-      .contact-box {
-        padding: 36px 24px;
-      }
-
-      .softskills-row {
-        gap: 16px;
-      }
-
-      .soft-card {
-        min-width: 130px;
-        padding: 28px 20px;
+      #hero {
+        padding: 100px 5% 60px;
+        min-height: auto;
       }
 
       .hero-name {
         white-space: normal;
-        font-size: clamp(2.2rem, 9vw, 4rem);
+        font-size: clamp(2.2rem, 8vw, 3.6rem);
+        line-height: 1.15;
       }
 
-      .r-modal {
-        padding: 40px 24px 32px;
+      .hero-tagline {
+        font-size: 1rem;
+        margin-bottom: 32px;
+      }
+
+      .hero-actions {
+        gap: 12px;
+        margin-bottom: 36px;
+      }
+
+      .btn {
+        padding: 12px 22px;
+        font-size: 0.86rem;
+      }
+
+      section {
+        padding: 70px 5%;
+      }
+
+      .section-header {
+        margin-bottom: 44px;
+      }
+
+      .section-title {
+        font-size: clamp(1.8rem, 5.5vw, 2.4rem);
+      }
+
+      .objective-card {
+        padding: 32px 24px;
+        border-radius: 18px;
+      }
+
+      .objective-card p {
+        font-size: 1rem;
+      }
+
+      .timeline {
+        padding-left: 0;
+      }
+
+      .timeline::before {
+        left: 14px;
+      }
+
+      .timeline-item {
+        gap: 18px;
+        padding-left: 6px;
+        margin-bottom: 30px;
+      }
+
+      .timeline-dot {
+        width: 16px;
+        height: 16px;
+        margin-top: 4px;
+      }
+
+      .timeline-content {
+        padding: 20px 22px;
+        border-radius: 14px;
+      }
+
+      .intern-card {
+        padding: 30px 24px;
+        border-radius: 18px;
+      }
+
+      .intern-header h3 {
+        font-size: 1.25rem;
+      }
+
+      .projects-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .proj-card {
+        padding: 24px 22px;
+        border-radius: 16px;
+        gap: 16px;
+      }
+
+      .certs-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+
+      .cert-card {
+        padding: 24px 22px;
+      }
+
+      .skills-container {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+
+      .softskills-row {
+        gap: 14px;
+      }
+
+      .soft-card {
+        min-width: 120px;
+        padding: 24px 18px;
+        border-radius: 16px;
+      }
+
+      .contact-box {
+        padding: 36px 22px;
+        border-radius: 20px;
+      }
+
+      .contact-item {
+        padding: 12px 16px;
+        margin-bottom: 14px;
+      }
+
+      #scrollTop {
+        bottom: 20px;
+        right: 20px;
+        width: 42px;
+        height: 42px;
+      }
+    }
+
+    /* SMALL MOBILE PHONES (≤ 480px, e.g. iPhone SE, Galaxy S) */
+    @media (max-width: 480px) {
+      #hero {
+        padding: 85px 4% 45px;
+      }
+
+      .hero-badge {
+        font-size: 0.7rem;
+        padding: 5px 12px;
+        margin-bottom: 20px;
+      }
+
+      .hero-name {
+        font-size: clamp(1.85rem, 8.5vw, 2.5rem);
+      }
+
+      .hero-title {
+        font-size: 0.85rem;
+        margin-bottom: 18px;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+        width: 100%;
+      }
+
+      .btn {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .social-row {
+        gap: 14px;
+      }
+
+      .social-icon {
+        width: 42px;
+        height: 42px;
+        border-radius: 12px;
+      }
+
+      section {
+        padding: 55px 4%;
+      }
+
+      .objective-card {
+        padding: 24px 18px;
+      }
+
+      .objective-card p {
+        font-size: 0.92rem;
+        line-height: 1.65;
+      }
+
+      .timeline-content {
+        padding: 16px 16px;
+      }
+
+      .timeline-content h3 {
+        font-size: 1.05rem;
+      }
+
+      .intern-card {
+        padding: 22px 16px;
+      }
+
+      .proj-card {
+        padding: 20px 16px;
+      }
+
+      .proj-title {
+        font-size: 1.2rem;
+      }
+
+      .proj-desc {
+        font-size: 0.88rem;
+      }
+
+      .softskills-row {
+        flex-direction: column;
+      }
+
+      .soft-card {
+        max-width: 100%;
+        width: 100%;
+      }
+
+      .contact-box {
+        padding: 26px 16px;
+      }
+
+      .contact-item {
+        padding: 10px 14px;
+        gap: 10px;
+      }
+
+      .contact-item .ci-icon {
+        width: 32px;
+        height: 32px;
+        font-size: 0.9rem;
+      }
+
+      .contact-item .ci-value {
+        font-size: 0.84rem;
       }
     }
   </style>
@@ -1614,10 +1896,16 @@
   <script>
     // ── NAV ──
     function toggleNav() {
-      document.getElementById('navLinks').classList.toggle('open');
+      const nav = document.getElementById('navLinks');
+      const burger = document.getElementById('hamburger');
+      nav.classList.toggle('open');
+      burger.classList.toggle('open');
     }
     document.querySelectorAll('.nav-links a').forEach(l => {
-      l.addEventListener('click', () => document.getElementById('navLinks').classList.remove('open'));
+      l.addEventListener('click', () => {
+        document.getElementById('navLinks').classList.remove('open');
+        document.getElementById('hamburger').classList.remove('open');
+      });
     });
 
     // ── SCROLL TOP ──
