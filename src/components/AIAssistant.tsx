@@ -11,7 +11,7 @@ const KB = {
 
 She is currently pursuing B.E. Computer Science & Engineering (Honours in Blockchain Technology) at Dr. N.G.P Institute of Technology (2023–2027) with a CGPA of 8.35.
 
-She has hands-on experience in full-stack web development, AI/ML systems, mobile apps, IoT, and DevOps — with 8 real-world projects on GitHub.`,
+She has hands-on experience in full-stack web development, AI/ML systems, mobile apps, IoT, and DevOps — with 10 real-world projects on GitHub.`,
 
   skills: `Programming: Java, Python, C
 AI / Machine Learning: PyTorch, OpenCV, CNN, Image Processing, Grad-CAM / XAI
@@ -20,9 +20,9 @@ Databases: SQL, MySQL, PostgreSQL, SQLite
 DevOps: Docker, Kubernetes
 Tools: Git, GitHub, VS Code, Android Studio, Postman, IntelliJ IDEA`,
 
-  projects: `1. CuraNet – Caregiver Support System (HTML, CSS, JS, PostgreSQL) – github.com/SowndharyaPL15/CuraNet
-2. PharmaTrace AI – Medicine Authentication (Node.js, Express, PostgreSQL, Python, Flask, OpenCV) – github.com/SowndharyaPL15/pharmatrace-ai
-3. SmartExpensePro – SMS Expense Tracker (Android, Java, SQLite) – github.com/SowndharyaPL15/SmartExpensePro
+  projects: `1. CuraNet – Caregiver Support System (HTML, CSS, JS, PostgreSQL) – github.com/SowndharyaPL15/CuraNet | Demo: https://curanet-mj06.onrender.com/
+2. PharmaTrace AI – Medicine Authentication (Node.js, Express, PostgreSQL, Python, Flask, OpenCV) – github.com/SowndharyaPL15/pharmatrace-ai | Demo: https://pharmatrace-web-server.onrender.com
+3. SmartExpensePro – SMS Expense Tracker (Android, Java, SQLite) – github.com/SowndharyaPL15/SmartExpensePro | Demo: https://smartexpensepro.onrender.com/
 4. Aerial Object Detection – IoT Based (Arduino, Embedded Systems, IoT, C, C++) – Research Paper (2nd Prize)
 5. CivicPulse – Smart Civic Issue Management (PHP, MySQL, JavaScript, Bootstrap) – github.com/SowndharyaPL15/CivicPulse
 6. Connectify – Real-Time Chat Application (Laravel, PHP, MySQL, JavaScript, WebSockets) – github.com/SowndharyaPL15/connectify-cartrabbit

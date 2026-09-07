@@ -33,6 +33,7 @@ const PROJECTS: (ProjectData & {
     ],
     tags: ["HTML", "CSS", "JavaScript", "PostgreSQL", "Express.js"],
     github: "https://github.com/SowndharyaPL15/CuraNet",
+    demo: "https://curanet-mj06.onrender.com/",
     images: ["/projects/curanet/1.svg"],
     challenges: "Synchronizing care state across multi-shift staff while maintaining HIPAA-compliant data boundaries.",
     personalContribution: "Engineered full relational schema in PostgreSQL, built Express REST endpoints for schedule CRUD operations, and implemented glassmorphic caregiver UI.",
@@ -59,6 +60,7 @@ const PROJECTS: (ProjectData & {
     ],
     tags: ["Node.js", "Express.js", "PostgreSQL", "Python", "Flask", "OpenCV"],
     github: "https://github.com/SowndharyaPL15/pharmatrace-ai",
+    demo: "https://pharmatrace-web-server.onrender.com",
     images: ["/projects/pharmatrace/1.svg"],
     challenges: "Optimizing computer vision models to accurately detect micro-print flaws in packaging under poor camera lighting.",
     personalContribution: "Developed the Flask AI microservice, integrated OpenCV packaging verification algorithms, and connected Node.js REST API with PostgreSQL database.",
@@ -85,6 +87,7 @@ const PROJECTS: (ProjectData & {
     ],
     tags: ["Android", "Java", "SMS API", "SQLite", "MPAndroidChart"],
     github: "https://github.com/SowndharyaPL15/SmartExpensePro",
+    demo: "https://smartexpensepro.onrender.com/",
     images: ["/projects/smartexpense/1.svg"],
     challenges: "Handling varied SMS templates across different financial institutions and international banks.",
     personalContribution: "Architected native Android SMS BroadcastReceiver, created regex rule engine for 15+ bank SMS formats, and built MPAndroidChart financial visualizer.",
@@ -394,6 +397,20 @@ export default function ProjectsWorkspace({ selectedProjectNum, setSelectedProje
 
               {/* Action links */}
               <div className="flex flex-wrap gap-3 pt-2">
+                {selectedProject.demo && (
+                  <a
+                    href={selectedProject.demo}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="cyber-button font-space text-xs px-4 py-2 rounded-lg flex items-center gap-2 font-bold"
+                    style={{ background: "var(--accent-secondary)", color: "#000", border: "none" }}
+                  >
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+                    </svg>
+                    LIVE DEMO
+                  </a>
+                )}
                 {selectedProject.github ? (
                   <a
                     href={selectedProject.github}

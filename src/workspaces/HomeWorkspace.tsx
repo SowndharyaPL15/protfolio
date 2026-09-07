@@ -11,9 +11,9 @@ const ROLES = [
 ];
 
 const PROJECTS = [
-  { name: "CuraNet", num: "Project 01", desc: "Caregiver Support System", tech: ["HTML", "CSS", "JS", "PostgreSQL"], github: "https://github.com/SowndharyaPL15/CuraNet", img: "/projects/curanet/1.svg" },
-  { name: "PharmaTrace AI", num: "Project 02", desc: "Medicine Authentication", tech: ["Node.js", "Express", "Python", "Flask"], github: "https://github.com/SowndharyaPL15/pharmatrace-ai", img: "/projects/pharmatrace/1.svg" },
-  { name: "SmartExpensePro", num: "Project 03", desc: "SMS Expense Tracker", tech: ["Android", "Java", "Kotlin", "SMS API"], github: "https://github.com/SowndharyaPL15/SmartExpensePro", img: "/projects/smartexpense/1.svg" },
+  { name: "CuraNet", num: "Project 01", desc: "Caregiver Support System", tech: ["HTML", "CSS", "JS", "PostgreSQL"], github: "https://github.com/SowndharyaPL15/CuraNet", demo: "https://curanet-mj06.onrender.com/", img: "/projects/curanet/1.svg" },
+  { name: "PharmaTrace AI", num: "Project 02", desc: "Medicine Authentication", tech: ["Node.js", "Express", "Python", "Flask"], github: "https://github.com/SowndharyaPL15/pharmatrace-ai", demo: "https://pharmatrace-web-server.onrender.com", img: "/projects/pharmatrace/1.svg" },
+  { name: "SmartExpensePro", num: "Project 03", desc: "SMS Expense Tracker", tech: ["Android", "Java", "Kotlin", "SMS API"], github: "https://github.com/SowndharyaPL15/SmartExpensePro", demo: "https://smartexpensepro.onrender.com/", img: "/projects/smartexpense/1.svg" },
   { name: "Aerial Object Detection", num: "Project 04", desc: "IoT Based System", tech: ["Arduino", "IoT", "Embedded", "C"], github: "", img: "/projects/aerial-detection/1.svg" },
   { name: "CivicPulse", num: "Project 05", desc: "Smart Civic Management", tech: ["PHP", "MySQL", "JS", "Bootstrap"], github: "https://github.com/SowndharyaPL15/CivicPulse", img: "/projects/civicpulse/1.svg" },
   { name: "Connectify", num: "Project 06", desc: "Real-Time Chat App", tech: ["Laravel", "PHP", "MySQL", "JS"], github: "https://github.com/SowndharyaPL15/connectify-cartrabbit", img: "/projects/connectify/1.svg" },
@@ -232,7 +232,7 @@ export default function HomeWorkspace({ setActiveTab, setSelectedProjectNum }: H
       {/* ===== ROW 2: STAT CARDS ===== */}
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2 flex-shrink-0">
         {[
-          { icon: "🚀", v: "8", l: "Projects Completed", c: "var(--accent-primary)" },
+          { icon: "🚀", v: "10", l: "Projects Completed", c: "var(--accent-primary)" },
           { icon: "</>", v: "15+", l: "Technologies Mastered", c: "var(--accent-secondary)" },
           { icon: "📄", v: "2", l: "Certifications & Achievements", c: "var(--accent-tertiary)" },
           { icon: "💼", v: "1", l: "Internship Experience", c: "var(--accent-primary)" },

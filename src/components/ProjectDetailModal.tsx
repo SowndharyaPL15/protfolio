@@ -207,6 +207,19 @@ export default function ProjectDetailModal({ project, onClose }: ProjectDetailMo
 
           {/* Action Links */}
           <div className="flex items-center justify-end gap-3 pt-4 border-t border-[var(--border-subtle)]">
+            {project.demo && (
+              <a
+                href={project.demo}
+                target="_blank"
+                rel="noreferrer"
+                className="font-space text-xs px-4 py-2 rounded-lg bg-[var(--accent-secondary)] text-black font-bold hover:brightness-110 transition-all flex items-center gap-2"
+              >
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+                </svg>
+                Live Demo
+              </a>
+            )}
             {project.github && (
               <a
                 href={project.github}

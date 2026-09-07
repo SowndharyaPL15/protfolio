@@ -16,6 +16,7 @@ const PROJECTS: ProjectData[] = [
     ],
     tags:   ["HTML", "CSS", "JavaScript", "PostgreSQL"],
     github: "https://github.com/SowndharyaPL15/CuraNet",
+    demo:   "https://curanet-mj06.onrender.com/",
     images: ["/projects/curanet/1.png", "/projects/curanet/2.png"],
   },
   {
@@ -30,6 +31,7 @@ const PROJECTS: ProjectData[] = [
     ],
     tags:   ["Node.js", "Express.js", "PostgreSQL", "Python"],
     github: "https://github.com/SowndharyaPL15/pharmatrace-ai",
+    demo:   "https://pharmatrace-web-server.onrender.com",
     images: ["/projects/pharmatrace/1.png"],
   },
   {
@@ -44,6 +46,7 @@ const PROJECTS: ProjectData[] = [
     ],
     tags:   ["Android", "Java", "SMS API"],
     github: "https://github.com/SowndharyaPL15/SmartExpensePro",
+    demo:   "https://smartexpensepro.onrender.com/",
     images: ["/projects/smartexpense/1.png"],
   },
   {
