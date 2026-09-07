@@ -28,8 +28,8 @@ Tools: Git, GitHub, VS Code, Android Studio, Postman, IntelliJ IDEA`,
 6. Connectify – Real-Time Chat Application (Laravel, PHP, MySQL, JavaScript, WebSockets) – github.com/SowndharyaPL15/connectify-cartrabbit | Demo: https://connectify-bw2w.onrender.com
 7. ModelHubX – MLOps Registry & Deployment (FastAPI, Kubernetes, Redis, Docker, Next.js) – github.com/SowndharyaPL15/ModelHubX | Demo: https://modelhubx-1.onrender.com/
 8. AI Product Authentication System (Python, PyTorch, OpenCV, CNN, React) – github.com/SowndharyaPL15/AI-Product-Authentication-System | Demo: https://ai-product-authentication-system.onrender.com
-9. Clixora – URL Shortening & Analytics (React, Node.js, Express, PostgreSQL) – github.com/SowndharyaPL15/Clixora
-10. INDUS AI – Industrial Cognitive Memory System (FastAPI, React, PostgreSQL, FAISS, LangChain, Python) – github.com/SowndharyaPL15/indus_ai`,
+9. Clixora – URL Shortening & Analytics (React, Node.js, Express, PostgreSQL) – github.com/SowndharyaPL15/Clixora | Demo: https://clixora-frontend.onrender.com
+10. INDUS AI – Industrial Cognitive Memory System (FastAPI, React, PostgreSQL, FAISS, LangChain, Python) – github.com/SowndharyaPL15/indus_ai | Demo: https://indus-ai-frontend.onrender.com`,
 
   education: `🎓 B.E. Computer Science & Engineering (Honours in Blockchain Technology)
    Dr. N.G.P Institute of Technology | 2023–2027 | CGPA: 8.35 (SEM-6)

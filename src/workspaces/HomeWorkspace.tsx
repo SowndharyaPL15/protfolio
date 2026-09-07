@@ -19,8 +19,8 @@ const PROJECTS = [
   { name: "Connectify", num: "Project 06", desc: "Real-Time Chat App", tech: ["Laravel", "PHP", "MySQL", "JS"], github: "https://github.com/SowndharyaPL15/connectify-cartrabbit", demo: "https://connectify-bw2w.onrender.com", img: "/projects/connectify/1.svg" },
   { name: "ModelHubX", num: "Project 07", desc: "MLOps Registry & Deployment", tech: ["FastAPI", "Kubernetes", "Redis", "Docker"], github: "https://github.com/SowndharyaPL15/ModelHubX", demo: "https://modelhubx-1.onrender.com/", img: "/projects/modelhubx/1.svg" },
   { name: "AI Product Auth System", num: "Project 08", desc: "XAI Based Authentication", tech: ["Python", "PyTorch", "OpenCV", "CNN"], github: "https://github.com/SowndharyaPL15/AI-Product-Authentication-System", demo: "https://ai-product-authentication-system.onrender.com", img: "/projects/ai-auth/1.svg" },
-  { name: "Clixora", num: "Project 09", desc: "URL Shortener & Analytics", tech: ["React", "Node.js", "Express", "Postgres"], github: "https://github.com/SowndharyaPL15/Clixora", img: "/projects/clixora/1.svg" },
-  { name: "INDUS AI", num: "Project 10", desc: "Factory Cognitive Memory", tech: ["FastAPI", "FAISS", "LangChain", "Python"], github: "https://github.com/SowndharyaPL15/indus_ai", img: "/projects/indus_ai/1.svg" },
+  { name: "Clixora", num: "Project 09", desc: "URL Shortener & Analytics", tech: ["React", "Node.js", "Express", "Postgres"], github: "https://github.com/SowndharyaPL15/Clixora", demo: "https://clixora-frontend.onrender.com", img: "/projects/clixora/1.svg" },
+  { name: "INDUS AI", num: "Project 10", desc: "Factory Cognitive Memory", tech: ["FastAPI", "FAISS", "LangChain", "Python"], github: "https://github.com/SowndharyaPL15/indus_ai", demo: "https://indus-ai-frontend.onrender.com", img: "/projects/indus_ai/1.svg" },
 ];
 
 const SKILLS = [
