@@ -288,8 +288,8 @@ const PROJECTS: (ProjectData & {
   },
   {
     num: "Project 11",
-    title: "Precision Oncology – Clinical Decision Support",
-    desc: "An AI-powered clinical decision support framework designed to assist pathologists and oncologists in diagnosing Lung and Breast cancer using deep transfer learning and Explainable AI.",
+    title: "Precision Oncology – Clinical CDSS",
+    desc: "An AI-powered clinical decision support framework for diagnosing Lung and Breast cancer using deep transfer learning and Explainable AI.",
     problem: "Manual histopathological cancer diagnosis is time-consuming and subjective, with high cognitive burden on pathologists and a critical need for interpretable, trustworthy AI explanations.",
     architecture: "FastAPI Backend (PyTorch / TensorFlow) ──▶ Grad-CAM Explainable AI Module ──▶ React Diagnostics UI",
     workflow: [
@@ -299,10 +299,10 @@ const PROJECTS: (ProjectData & {
       "Grad-CAM synthesizes visual explainability heatmaps highlighting specific malignant tissue regions on the biopsy"
     ],
     features: [
-      "Multimodal Histopathology Analysis",
+      "Multimodal Histopathology AI",
       "Deep Transfer Learning (DenseNet)",
-      "Explainable AI (Grad-CAM) Heatmaps",
-      "Interactive Diagnostic Web Dashboard",
+      "Explainable AI (Grad-CAM)",
+      "Clinical Diagnostics Dashboard",
     ],
     tags: ["FastAPI", "React", "TensorFlow", "DenseNet", "PyTorch", "Grad-CAM"],
     github: "https://github.com/SowndharyaPL15/Precision-Oncology-CDSS",

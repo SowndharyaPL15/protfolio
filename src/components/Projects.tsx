@@ -159,13 +159,13 @@ const PROJECTS: ProjectData[] = [
   },
   {
     num:      "Project 11",
-    title:    "Precision Oncology – Clinical Decision Support",
+    title:    "Precision Oncology – Clinical CDSS",
     desc:     "AI-powered clinical decision support framework for diagnosing Lung and Breast cancer from histopathology images using deep transfer learning and Explainable AI.",
     features: [
-      "Multimodal Histopathology Analysis",
+      "Multimodal Histopathology AI",
       "Deep Transfer Learning (DenseNet)",
-      "Explainable AI (Grad-CAM) Heatmaps",
-      "Interactive Diagnostic Web Dashboard",
+      "Explainable AI (Grad-CAM)",
+      "Clinical Diagnostics Dashboard",
     ],
     tags:   ["FastAPI", "React", "TensorFlow", "DenseNet", "PyTorch", "Grad-CAM"],
     github: "https://github.com/SowndharyaPL15/Precision-Oncology-CDSS",

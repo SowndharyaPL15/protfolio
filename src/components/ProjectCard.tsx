@@ -262,7 +262,7 @@ export default function ProjectCard({ project, index = 0 }: ProjectCardProps) {
 
           {/* Title */}
           <h3
-            className="text-sm font-bold mb-1.5 font-space leading-snug transition-colors line-clamp-2 min-h-[2.5rem]"
+            className="text-sm font-bold mb-1.5 font-space leading-snug transition-colors line-clamp-2 h-[2.5rem] overflow-hidden"
             style={{ color: "var(--text-main)" }}
           >
             {project.title}
@@ -270,34 +270,34 @@ export default function ProjectCard({ project, index = 0 }: ProjectCardProps) {
 
           {/* Description */}
           <p
-            className="text-xs leading-relaxed mb-3 line-clamp-2 min-h-[2.25rem]"
+            className="text-xs leading-relaxed mb-3 line-clamp-2 h-[2.25rem] overflow-hidden"
             style={{ color: "var(--text-muted)" }}
           >
             {project.desc}
           </p>
 
           {/* Features */}
-          <ul className="space-y-1 mb-3 min-h-[3.75rem]">
+          <ul className="space-y-1 mb-3 h-[3.75rem] overflow-hidden">
             {project.features.slice(0, 3).map((feat, i) => (
-              <li key={i} className="flex items-start gap-2 text-[10px] line-clamp-1" style={{ color: "var(--text-muted)" }}>
+              <li key={i} className="flex items-center gap-2 text-[10px] truncate" style={{ color: "var(--text-muted)" }}>
                 <span
-                  className="w-1 h-1 rounded-full mt-1.5 flex-shrink-0"
+                  className="w-1 h-1 rounded-full flex-shrink-0"
                   style={{ background: "var(--accent-primary)" }}
                 />
-                {feat}
+                <span className="truncate">{feat}</span>
               </li>
             ))}
           </ul>
 
           {/* Tech tags */}
           <div
-            className="flex flex-wrap gap-1.5 pt-3 mt-auto min-h-[3.25rem]"
+            className="flex flex-wrap gap-1.5 pt-3 mt-auto h-[3.25rem] overflow-hidden"
             style={{ borderTop: "1px solid var(--border-subtle)" }}
           >
             {project.tags.map((tag, i) => (
               <span
                 key={i}
-                className="font-space text-[9px] px-2 py-0.5 rounded"
+                className="font-space text-[9px] px-2 py-0.5 rounded flex-shrink-0"
                 style={{
                   color: TAG_COLORS[tag] ?? "var(--text-muted)",
                   background: TAG_COLORS[tag]
