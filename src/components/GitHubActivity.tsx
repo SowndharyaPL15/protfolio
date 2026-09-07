@@ -45,8 +45,144 @@ const LANGUAGE_OVERRIDES: Record<string, string> = {
   "protfolio": "TypeScript",
   "pharmatrace-ai": "Python",
   "civicpulse": "PHP",
-  "CuraNet": "JavaScript"
+  "CuraNet": "JavaScript",
+  "Precision-Oncology-CDSS": "Python",
+  "indus_ai": "Python",
+  "Clixora": "TypeScript",
+  "SmartExpensePro": "Java",
+  "connectify-cartrabbit": "PHP",
 };
+
+const FALLBACK_USER: GitHubUser = {
+  public_repos: 12,
+  followers: 15,
+  following: 12,
+  bio: "B.E CSE Student | Full Stack Developer | AI & Machine Learning Enthusiast",
+  avatar_url: "https://avatars.githubusercontent.com/u/154746686?v=4",
+};
+
+const FALLBACK_REPOS: GitHubRepo[] = [
+  {
+    name: "Precision-Oncology-CDSS",
+    description: "AI-powered clinical decision support framework for diagnosing Lung and Breast cancer using transfer learning and Explainable AI (Grad-CAM).",
+    html_url: "https://github.com/SowndharyaPL15/Precision-Oncology-CDSS",
+    stargazers_count: 2,
+    forks_count: 0,
+    language: "Python",
+    updated_at: new Date().toISOString(),
+    topics: ["fastapi", "react", "tensorflow", "pytorch", "densenet", "explainable-ai"],
+  },
+  {
+    name: "indus_ai",
+    description: "Industrial Cognitive Memory System for factory knowledge preservation using FAISS vector search and LangChain / LangGraph agents.",
+    html_url: "https://github.com/SowndharyaPL15/indus_ai",
+    stargazers_count: 1,
+    forks_count: 0,
+    language: "Python",
+    updated_at: new Date().toISOString(),
+    topics: ["fastapi", "react", "faiss", "langchain", "langgraph", "rag"],
+  },
+  {
+    name: "Clixora",
+    description: "Full-stack URL shortening and real-time link analytics platform with secure JWT auth and CSV bulk uploads.",
+    html_url: "https://github.com/SowndharyaPL15/Clixora",
+    stargazers_count: 2,
+    forks_count: 0,
+    language: "TypeScript",
+    updated_at: new Date().toISOString(),
+    topics: ["react", "nodejs", "express", "postgresql", "tailwindcss"],
+  },
+  {
+    name: "ModelHubX",
+    description: "MLOps Model Registry & Deployment platform with FastAPI, Kubernetes orchestration, and Redis caching.",
+    html_url: "https://github.com/SowndharyaPL15/ModelHubX",
+    stargazers_count: 1,
+    forks_count: 0,
+    language: "Python",
+    updated_at: new Date().toISOString(),
+    topics: ["fastapi", "kubernetes", "redis", "docker", "mlops"],
+  },
+  {
+    name: "AI-Product-Authentication-System",
+    description: "Counterfeit product authentication framework using deep learning CNNs and Explainable AI visual heatmaps.",
+    html_url: "https://github.com/SowndharyaPL15/AI-Product-Authentication-System",
+    stargazers_count: 1,
+    forks_count: 0,
+    language: "Python",
+    updated_at: new Date().toISOString(),
+    topics: ["pytorch", "opencv", "cnn", "xai", "react"],
+  },
+  {
+    name: "connectify-cartrabbit",
+    description: "Real-time chat and collaboration web application with WebSocket messaging, group channels, and media sharing.",
+    html_url: "https://github.com/SowndharyaPL15/connectify-cartrabbit",
+    stargazers_count: 1,
+    forks_count: 0,
+    language: "PHP",
+    updated_at: new Date().toISOString(),
+    topics: ["laravel", "php", "websockets", "mysql"],
+  },
+  {
+    name: "civicpulse",
+    description: "Smart Civic Issue Management platform for citizens to report municipal grievances with real-time status tracking.",
+    html_url: "https://github.com/SowndharyaPL15/CivicPulse",
+    stargazers_count: 0,
+    forks_count: 0,
+    language: "PHP",
+    updated_at: new Date().toISOString(),
+    topics: ["php", "mysql", "javascript", "bootstrap"],
+  },
+  {
+    name: "SmartExpensePro",
+    description: "Automated SMS expense tracker and financial analytics application for Android with SQLite and data charts.",
+    html_url: "https://github.com/SowndharyaPL15/SmartExpensePro",
+    stargazers_count: 1,
+    forks_count: 0,
+    language: "Java",
+    updated_at: new Date().toISOString(),
+    topics: ["android", "java", "sqlite", "mpandroidchart"],
+  },
+  {
+    name: "pharmatrace-ai",
+    description: "Counterfeit drug detection and supply-chain verification system using Python Flask AI and QR-code tracking.",
+    html_url: "https://github.com/SowndharyaPL15/pharmatrace-ai",
+    stargazers_count: 1,
+    forks_count: 0,
+    language: "Python",
+    updated_at: new Date().toISOString(),
+    topics: ["flask", "nodejs", "opencv", "postgresql"],
+  },
+  {
+    name: "CuraNet",
+    description: "Caregiver support and patient management platform for tracking schedules, medications, and caregiver handovers.",
+    html_url: "https://github.com/SowndharyaPL15/CuraNet",
+    stargazers_count: 1,
+    forks_count: 0,
+    language: "JavaScript",
+    updated_at: new Date().toISOString(),
+    topics: ["javascript", "html", "css", "postgresql", "express"],
+  },
+  {
+    name: "protfolio",
+    description: "Interactive personal developer portfolio IDE built with Next.js, TypeScript, Tailwind CSS, and Framer Motion.",
+    html_url: "https://github.com/SowndharyaPL15/protfolio",
+    stargazers_count: 1,
+    forks_count: 0,
+    language: "TypeScript",
+    updated_at: new Date().toISOString(),
+    topics: ["nextjs", "react", "typescript", "tailwindcss", "portfolio"],
+  },
+  {
+    name: "SowndharyaPL15",
+    description: "Special GitHub Profile README configuration and personal developer branding repository.",
+    html_url: "https://github.com/SowndharyaPL15/SowndharyaPL15",
+    stargazers_count: 1,
+    forks_count: 0,
+    language: "Markdown",
+    updated_at: new Date().toISOString(),
+    topics: ["github-profile", "config"],
+  },
+];
 
 /** Build a deterministic-looking 26-week heatmap using repo activity */
 function buildHeatmap(repos: GitHubRepo[]): number[][] {
@@ -84,10 +220,10 @@ const CARD_ANIM = {
 };
 
 export default function GitHubActivity() {
-  const [user,    setUser]    = useState<GitHubUser | null>(null);
-  const [repos,   setRepos]   = useState<GitHubRepo[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error,   setError]   = useState(false);
+  const [user,    setUser]    = useState<GitHubUser>(FALLBACK_USER);
+  const [repos,   setRepos]   = useState<GitHubRepo[]>(FALLBACK_REPOS);
+  const [loading, setLoading] = useState(false);
+  const [isLive,  setIsLive]  = useState(false);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -99,12 +235,18 @@ export default function GitHubActivity() {
           fetch(`https://api.github.com/users/${USERNAME}`, { signal }),
           fetch(`https://api.github.com/users/${USERNAME}/repos?sort=updated&per_page=100`, { signal }),
         ]);
-        if (!uRes.ok || !rRes.ok) throw new Error("API");
-        const [uData, rData] = await Promise.all([uRes.json(), rRes.json()]);
-        setUser(uData);
-        setRepos(Array.isArray(rData) ? rData : []);
+        if (uRes.ok && rRes.ok) {
+          const [uData, rData] = await Promise.all([uRes.json(), rRes.json()]);
+          if (uData && typeof uData === "object" && !uData.message) {
+            setUser(uData);
+          }
+          if (Array.isArray(rData) && rData.length > 0) {
+            setRepos(rData);
+          }
+          setIsLive(true);
+        }
       } catch {
-        if (!signal.aborted) setError(true);
+        // Fallback data is already loaded in state
       } finally {
         if (!signal.aborted) setLoading(false);
       }
@@ -141,9 +283,17 @@ export default function GitHubActivity() {
         className="flex items-center justify-between pb-3"
         style={{ borderBottom: "1px solid var(--border-subtle)" }}
       >
-        <h2 className="font-space text-sm font-bold uppercase tracking-widest text-glow">
-          GITHUB ACTIVITY
-        </h2>
+        <div className="flex items-center gap-2">
+          <h2 className="font-space text-sm font-bold uppercase tracking-widest text-glow">
+            GITHUB ACTIVITY
+          </h2>
+          {isLive && (
+            <span className="font-space text-[9px] px-1.5 py-0.5 rounded flex items-center gap-1" style={{ background: "rgba(16,185,129,0.1)", color: "#10b981", border: "1px solid rgba(16,185,129,0.2)" }}>
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+              LIVE
+            </span>
+          )}
+        </div>
         <a
           href={`https://github.com/${USERNAME}`}
           target="_blank"
@@ -156,42 +306,8 @@ export default function GitHubActivity() {
         </a>
       </div>
 
-      {loading && (
-        <div className="cyber-panel p-10 rounded-lg flex items-center justify-center">
-          <div className="flex gap-2">
-            {[0, 1, 2].map((i) => (
-              <span
-                key={i}
-                className="w-2 h-2 rounded-full animate-bounce"
-                style={{ background: "var(--accent-primary)", animationDelay: `${i * 0.15}s` }}
-              />
-            ))}
-          </div>
-        </div>
-      )}
-
-      {error && (
-        <div
-          className="cyber-panel p-6 rounded-lg text-center font-space text-xs"
-          style={{ color: "var(--text-muted)" }}
-        >
-          GitHub data unavailable.{" "}
-          <a
-            href={`https://github.com/${USERNAME}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="underline"
-            style={{ color: "var(--accent-primary)" }}
-          >
-            View profile directly →
-          </a>
-        </div>
-      )}
-
-      {!loading && !error && (
-        <>
-          {/* Stats row */}
-          {user && (
+      {/* Stats row */}
+      {user && (
             <div className="grid grid-cols-3 gap-3">
               {[
                 { label: "Repositories", value: user.public_repos, icon: "📁" },
@@ -407,8 +523,6 @@ export default function GitHubActivity() {
               ))}
             </div>
           </div>
-        </>
-      )}
     </div>
   );
 }
