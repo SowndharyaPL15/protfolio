@@ -25,9 +25,9 @@ Tools: Git, GitHub, VS Code, Android Studio, Postman, IntelliJ IDEA`,
 3. SmartExpensePro – SMS Expense Tracker (Android, Java, SQLite) – github.com/SowndharyaPL15/SmartExpensePro | Demo: https://smartexpensepro.onrender.com/
 4. Aerial Object Detection – IoT Based (Arduino, Embedded Systems, IoT, C, C++) – Research Paper (2nd Prize)
 5. CivicPulse – Smart Civic Issue Management (PHP, MySQL, JavaScript, Bootstrap) – github.com/SowndharyaPL15/CivicPulse
-6. Connectify – Real-Time Chat Application (Laravel, PHP, MySQL, JavaScript, WebSockets) – github.com/SowndharyaPL15/connectify-cartrabbit
-7. ModelHubX – MLOps Registry & Deployment (FastAPI, Kubernetes, Redis, Docker, Next.js) – github.com/SowndharyaPL15/ModelHubX
-8. AI Product Authentication System (Python, PyTorch, OpenCV, CNN, React) – github.com/SowndharyaPL15/AI-Product-Authentication-System
+6. Connectify – Real-Time Chat Application (Laravel, PHP, MySQL, JavaScript, WebSockets) – github.com/SowndharyaPL15/connectify-cartrabbit | Demo: https://connectify-bw2w.onrender.com
+7. ModelHubX – MLOps Registry & Deployment (FastAPI, Kubernetes, Redis, Docker, Next.js) – github.com/SowndharyaPL15/ModelHubX | Demo: https://modelhubx-1.onrender.com/
+8. AI Product Authentication System (Python, PyTorch, OpenCV, CNN, React) – github.com/SowndharyaPL15/AI-Product-Authentication-System | Demo: https://ai-product-authentication-system.onrender.com
 9. Clixora – URL Shortening & Analytics (React, Node.js, Express, PostgreSQL) – github.com/SowndharyaPL15/Clixora
 10. INDUS AI – Industrial Cognitive Memory System (FastAPI, React, PostgreSQL, FAISS, LangChain, Python) – github.com/SowndharyaPL15/indus_ai`,
 

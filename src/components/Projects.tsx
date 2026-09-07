@@ -90,6 +90,7 @@ const PROJECTS: ProjectData[] = [
     ],
     tags:   ["Laravel", "PHP", "MySQL", "JavaScript"],
     github: "https://github.com/SowndharyaPL15/connectify-cartrabbit",
+    demo:   "https://connectify-bw2w.onrender.com",
     images: ["/projects/connectify/1.png"],
   },
   {
@@ -104,6 +105,7 @@ const PROJECTS: ProjectData[] = [
     ],
     tags:   ["Python", "Kubernetes", "Redis", "Docker"],
     github: "https://github.com/SowndharyaPL15/ModelHubX",
+    demo:   "https://modelhubx-1.onrender.com/",
     badge:  "AI/ML",
     images: ["/projects/modelhubx/1.png"],
   },
@@ -119,6 +121,7 @@ const PROJECTS: ProjectData[] = [
     ],
     tags:   ["Python", "PyTorch", "OpenCV", "Machine Learning"],
     github: "https://github.com/SowndharyaPL15/AI-Product-Authentication-System",
+    demo:   "https://ai-product-authentication-system.onrender.com",
     badge:  "Deep Learning",
     images: ["/projects/ai-auth/1.png"],
   },
