@@ -28,9 +28,9 @@ export interface ContributionDay {
 
 export const REAL_GITHUB_USER: GitHubUser = {
   "public_repos": 14,
-  "followers": 15,
-  "following": 12,
-  "bio": "B.E CSE Student | Full Stack Developer | AI & Machine Learning Enthusiast",
+  "followers": 0,
+  "following": 0,
+  "bio": "Motivated Computer Science Engineering student and Full-Stack Developer passionate about building modern web applications and artificial intelligence solutions.",
   "avatar_url": "https://avatars.githubusercontent.com/u/154746686?v=4",
   "total_contributions": 937
 };
