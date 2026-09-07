@@ -1,9 +1,9 @@
 <table width="100%">
   <tr>
-    <td width="18%" align="center" valign="middle">
-      <img src="https://api.dicebear.com/7.x/initials/svg?seed=SP&backgroundColor=0d1527&textColor=38bdf8&radius=50&bold=true" width="100" height="100" alt="Avatar" />
+    <td width="20%" align="center" valign="middle">
+      <img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="115" alt="Developer Animation" style="border-radius: 12px;" />
     </td>
-    <td width="57%" valign="middle">
+    <td width="55%" valign="middle">
       <p align="left">
         <sub><b>Hi 👋, I'm</b></sub><br/>
         <font size="6"><b>Sowndharya P.L.</b></font><br/>
