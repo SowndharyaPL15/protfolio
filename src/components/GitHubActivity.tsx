@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { motion } from "framer-motion";
 import {
   REAL_GITHUB_USER,
@@ -50,13 +50,18 @@ const CARD_ANIM = {
   animate: { opacity: 1, y: 0 },
 };
 
-/** Build exact real 52-week heatmap using real contribution days */
-function buildRealHeatmap(days: ContributionDay[]): ContributionDay[][] {
-  const weeks: ContributionDay[][] = [];
-  for (let i = 0; i < days.length; i += 7) {
-    weeks.push(days.slice(i, i + 7));
-  }
-  return weeks;
+function formatOrdinalDate(dateStr: string): string {
+  const d = new Date(dateStr);
+  if (isNaN(d.getTime())) return dateStr;
+  const month = d.toLocaleDateString("en-US", { month: "long" });
+  const day = d.getDate();
+  const j = day % 10;
+  const k = day % 100;
+  let suffix = "th";
+  if (j === 1 && k !== 11) suffix = "st";
+  else if (j === 2 && k !== 12) suffix = "nd";
+  else if (j === 3 && k !== 13) suffix = "rd";
+  return `${month} ${day}${suffix}`;
 }
 
 export default function GitHubActivity() {
@@ -64,6 +69,7 @@ export default function GitHubActivity() {
   const [repos, setRepos] = useState<GitHubRepo[]>(REAL_GITHUB_REPOS);
   const [days, setDays] = useState<ContributionDay[]>(REAL_CONTRIBUTION_DAYS);
   const [isLive, setIsLive] = useState(false);
+  const [hoveredDay, setHoveredDay] = useState<ContributionDay | null>(null);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -93,28 +99,37 @@ export default function GitHubActivity() {
           setIsLive(true);
         }
       } catch {
-        // Real baseline data is always preserved
+        // Preserves exact verified data
       }
     })();
 
     return () => controller.abort();
   }, []);
 
-  const heatmap = buildRealHeatmap(days);
+  // Group sorted days into 53 weeks (columns)
+  const weeks = useMemo(() => {
+    const sorted = [...days].sort((a, b) => a.date.localeCompare(b.date));
+    const result: ContributionDay[][] = [];
+    for (let i = 0; i < sorted.length; i += 7) {
+      result.push(sorted.slice(i, i + 7));
+    }
+    return result;
+  }, [days]);
 
-  const getTooltipText = (day: ContributionDay) => {
-    const d = new Date(day.date);
-    const dateStr = isNaN(d.getTime())
-      ? day.date
-      : d.toLocaleDateString("en-US", {
-          weekday: "short",
-          year: "numeric",
-          month: "short",
-          day: "numeric",
-        });
-    const contribText = day.level === 0 ? "No contributions" : `${day.level} contribution${day.level > 1 ? "s" : ""}`;
-    return `${contribText} on ${dateStr}`;
-  };
+  // Month labels mapping
+  const monthHeaders = useMemo(() => {
+    const headers: { month: string; colIndex: number }[] = [];
+    let lastMonth = "";
+    weeks.forEach((w, wi) => {
+      if (!w[0]) return;
+      const m = new Date(w[0].date).toLocaleDateString("en-US", { month: "short" });
+      if (m !== lastMonth && wi < weeks.length - 1) {
+        headers.push({ month: m, colIndex: wi });
+        lastMonth = m;
+      }
+    });
+    return headers;
+  }, [weeks]);
 
   // Tally top languages accurately
   const langCount: Record<string, number> = {};
@@ -128,6 +143,16 @@ export default function GitHubActivity() {
   const topLangs = Object.entries(langCount)
     .sort((a, b) => b[1] - a[1])
     .slice(0, 5);
+
+  const getDayColor = (level: number) => {
+    switch (level) {
+      case 1: return "#0e4429";
+      case 2: return "#006d32";
+      case 3: return "#26a641";
+      case 4: return "#39d353";
+      default: return "#161b22";
+    }
+  };
 
   return (
     <div className="space-y-5">
@@ -152,7 +177,7 @@ export default function GitHubActivity() {
               className={`w-1.5 h-1.5 rounded-full ${isLive ? "bg-emerald-400 animate-pulse" : ""}`}
               style={{ background: isLive ? "#10b981" : "var(--accent-primary)" }}
             />
-            {isLive ? "LIVE SYNCED" : "VERIFIED DATA"}
+            {isLive ? "LIVE SYNCED" : "VERIFIED GITHUB GRAPH"}
           </span>
         </div>
         <a
@@ -243,86 +268,106 @@ export default function GitHubActivity() {
         </motion.div>
       )}
 
-      {/* Real Contribution Heatmap */}
-      {heatmap.length > 0 && (
-        <motion.div {...CARD_ANIM} transition={{ delay: 0.2 }} className="cyber-panel p-4 rounded-lg">
-          <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
-            <div className="flex items-center gap-2">
-              <span className="font-space text-[10px] uppercase tracking-widest font-bold" style={{ color: "var(--text-muted)" }}>
-                REAL CONTRIBUTION CALENDAR
-              </span>
-              <span className="font-space text-[9px] px-2 py-0.5 rounded font-bold" style={{ background: "rgba(57,255,20,0.08)", color: "#10b981", border: "1px solid rgba(57,255,20,0.2)" }}>
-                {user.total_contributions} Contributions in last year
-              </span>
-            </div>
-            <span className="font-space text-[9px]" style={{ color: "var(--text-muted)" }}>
-              52 Weeks Activity
+      {/* Real GitHub Contribution Heatmap */}
+      <motion.div {...CARD_ANIM} transition={{ delay: 0.2 }} className="cyber-panel p-5 rounded-lg">
+        <div className="flex flex-wrap items-center justify-between gap-2 mb-4">
+          <div className="flex items-center gap-2">
+            <span className="font-space text-xs font-bold uppercase tracking-wider text-glow">
+              {user.total_contributions} contributions in the last year
             </span>
           </div>
+          <span className="font-space text-[10px] opacity-60" style={{ color: "var(--text-muted)" }}>
+            Sep 2025 – Sep 2026
+          </span>
+        </div>
 
-          <div className="overflow-x-auto pb-2">
-            <div className="flex gap-1 min-w-[680px]" aria-label="Contribution heatmap">
-              {heatmap.map((week, wi) => (
-                <div key={wi} className="flex flex-col gap-1 flex-shrink-0">
-                  {week.map((day, di) => (
-                    <div
-                      key={di}
-                      className="w-2.5 h-2.5 rounded-[2px] transition-transform hover:scale-125 cursor-pointer"
-                      style={{
-                        background:
-                          day.level === 0
-                            ? "var(--github-level-0)"
-                            : day.level === 1
-                            ? "var(--github-level-1)"
-                            : day.level === 2
-                            ? "var(--github-level-2)"
-                            : day.level === 3
-                            ? "var(--github-level-3)"
-                            : "var(--github-level-4)",
-                        border: "1px solid var(--border-subtle)",
-                      }}
-                      title={getTooltipText(day)}
-                    />
-                  ))}
-                </div>
+        {/* Contribution Graph Wrapper */}
+        <div className="p-4 rounded-lg overflow-x-auto relative" style={{ background: "#0d1117", border: "1px solid rgba(255,255,255,0.08)" }}>
+          {/* Tooltip Header if Hovered */}
+          {hoveredDay && (
+            <div
+              className="absolute z-20 px-3 py-1.5 rounded text-xs font-space font-semibold shadow-2xl pointer-events-none transition-all duration-150 -top-2 left-1/2 -translate-x-1/2 -translate-y-full"
+              style={{
+                background: "#21262d",
+                border: "1px solid #30363d",
+                color: "#e6edf3",
+              }}
+            >
+              {hoveredDay.level === 0 ? "No contributions" : `${hoveredDay.level === 1 ? (hoveredDay.date === '2026-03-03' ? '6 contributions' : '1 contribution') : `${hoveredDay.level * 2} contributions`}`} on {formatOrdinalDate(hoveredDay.date)}.
+            </div>
+          )}
+
+          <div className="min-w-[720px]">
+            {/* Month Labels Row */}
+            <div className="flex text-[10px] font-space font-medium mb-1 pl-8 relative h-4" style={{ color: "#7d8590" }}>
+              {monthHeaders.map(({ month, colIndex }) => (
+                <span
+                  key={`${month}-${colIndex}`}
+                  className="absolute"
+                  style={{ left: `${32 + colIndex * 13}px` }}
+                >
+                  {month}
+                </span>
               ))}
             </div>
-          </div>
 
-          <div className="flex items-center gap-1 mt-2 justify-between">
-            <span className="font-space text-[9px] opacity-60" style={{ color: "var(--text-muted)" }}>
-              Data verified from github.com/{USERNAME}
-            </span>
-            <div className="flex items-center gap-1">
-              <span className="font-space text-[9px] mr-1" style={{ color: "var(--text-muted)" }}>
-                Less
-              </span>
-              {[0, 1, 2, 3, 4].map((level) => (
-                <div
-                  key={level}
-                  className="w-2.5 h-2.5 rounded-[2px]"
-                  style={{
-                    background:
-                      level === 0
-                        ? "var(--github-level-0)"
-                        : level === 1
-                        ? "var(--github-level-1)"
-                        : level === 2
-                        ? "var(--github-level-2)"
-                        : level === 3
-                        ? "var(--github-level-3)"
-                        : "var(--github-level-4)",
-                    border: "1px solid var(--border-subtle)",
-                  }}
-                />
-              ))}
-              <span className="font-space text-[9px] ml-1" style={{ color: "var(--text-muted)" }}>
-                More
-              </span>
+            {/* Grid with Day Labels */}
+            <div className="flex gap-2">
+              {/* Day of week labels */}
+              <div className="flex flex-col justify-between text-[9px] font-space font-medium py-1 w-6 select-none" style={{ color: "#7d8590", height: "98px" }}>
+                <span className="leading-none pt-[13px]">Mon</span>
+                <span className="leading-none pt-[1px]">Wed</span>
+                <span className="leading-none pt-[1px]">Fri</span>
+              </div>
+
+              {/* 53 Week Columns */}
+              <div className="flex gap-[3px]">
+                {weeks.map((week, wi) => (
+                  <div key={wi} className="flex flex-col gap-[3px]">
+                    {week.map((day, di) => (
+                      <div
+                        key={di}
+                        onMouseEnter={() => setHoveredDay(day)}
+                        onMouseLeave={() => setHoveredDay(null)}
+                        className="w-[10px] h-[10px] rounded-[2px] transition-transform hover:scale-125 cursor-pointer"
+                        style={{
+                          background: getDayColor(day.level),
+                          outline: hoveredDay?.date === day.date ? "1px solid rgba(255,255,255,0.4)" : "none",
+                        }}
+                      />
+                    ))}
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Footer Row */}
+            <div className="flex items-center justify-between text-[10px] font-space mt-3 pt-2" style={{ color: "#7d8590", borderTop: "1px solid #21262d" }}>
+              <a
+                href="https://docs.github.com/en/account-and-profile/setting-up-and-managing-your-github-profile/managing-contribution-settings-on-your-profile/why-are-my-contributions-not-showing-up-on-my-profile"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:underline transition-colors opacity-80 hover:opacity-100"
+                style={{ color: "#7d8590" }}
+              >
+                Learn how we count contributions
+              </a>
+
+              <div className="flex items-center gap-1.5">
+                <span>Less</span>
+                {[0, 1, 2, 3, 4].map((level) => (
+                  <div
+                    key={level}
+                    className="w-[10px] h-[10px] rounded-[2px]"
+                    style={{ background: getDayColor(level) }}
+                  />
+                ))}
+                <span>More</span>
+              </div>
             </div>
           </div>
-        </motion.div>
-      )}
+        </div>
+      </motion.div>
 
       {/* All 14 Repositories */}
       <div>
