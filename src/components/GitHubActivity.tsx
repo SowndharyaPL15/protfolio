@@ -1,15 +1,19 @@
 "use client";
 
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import {
   REAL_GITHUB_USER,
   REAL_GITHUB_REPOS,
-  REAL_CONTRIBUTION_DAYS,
   type GitHubUser,
   type GitHubRepo,
-  type ContributionDay,
 } from "@/data/githubData";
+import {
+  GITHUB_MONTH_LABELS,
+  GITHUB_WEEK_COLUMNS,
+  TOTAL_CONTRIBUTIONS,
+  type ContributionCell,
+} from "@/data/exactContributionCalendar";
 
 const USERNAME = "SowndharyaPL15";
 
@@ -50,26 +54,15 @@ const CARD_ANIM = {
   animate: { opacity: 1, y: 0 },
 };
 
-function formatOrdinalDate(dateStr: string): string {
-  const d = new Date(dateStr);
-  if (isNaN(d.getTime())) return dateStr;
-  const month = d.toLocaleDateString("en-US", { month: "long" });
-  const day = d.getDate();
-  const j = day % 10;
-  const k = day % 100;
-  let suffix = "th";
-  if (j === 1 && k !== 11) suffix = "st";
-  else if (j === 2 && k !== 12) suffix = "nd";
-  else if (j === 3 && k !== 13) suffix = "rd";
-  return `${month} ${day}${suffix}`;
-}
-
 export default function GitHubActivity() {
   const [user, setUser] = useState<GitHubUser>(REAL_GITHUB_USER);
   const [repos, setRepos] = useState<GitHubRepo[]>(REAL_GITHUB_REPOS);
-  const [days, setDays] = useState<ContributionDay[]>(REAL_CONTRIBUTION_DAYS);
   const [isLive, setIsLive] = useState(false);
-  const [hoveredDay, setHoveredDay] = useState<ContributionDay | null>(null);
+  const [hoveredCell, setHoveredCell] = useState<{
+    cell: ContributionCell;
+    x: number;
+    y: number;
+  } | null>(null);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -105,31 +98,6 @@ export default function GitHubActivity() {
 
     return () => controller.abort();
   }, []);
-
-  // Group sorted days into 53 weeks (columns)
-  const weeks = useMemo(() => {
-    const sorted = [...days].sort((a, b) => a.date.localeCompare(b.date));
-    const result: ContributionDay[][] = [];
-    for (let i = 0; i < sorted.length; i += 7) {
-      result.push(sorted.slice(i, i + 7));
-    }
-    return result;
-  }, [days]);
-
-  // Month labels mapping
-  const monthHeaders = useMemo(() => {
-    const headers: { month: string; colIndex: number }[] = [];
-    let lastMonth = "";
-    weeks.forEach((w, wi) => {
-      if (!w[0]) return;
-      const m = new Date(w[0].date).toLocaleDateString("en-US", { month: "short" });
-      if (m !== lastMonth && wi < weeks.length - 1) {
-        headers.push({ month: m, colIndex: wi });
-        lastMonth = m;
-      }
-    });
-    return headers;
-  }, [weeks]);
 
   // Tally top languages accurately
   const langCount: Record<string, number> = {};
@@ -196,7 +164,7 @@ export default function GitHubActivity() {
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
         {[
           { label: "Repositories",  value: user.public_repos, icon: "📁" },
-          { label: "Contributions", value: user.total_contributions, icon: "⚡" },
+          { label: "Contributions", value: TOTAL_CONTRIBUTIONS, icon: "⚡" },
           { label: "Followers",     value: user.followers, icon: "👥" },
           { label: "Following",     value: user.following, icon: "🔗" },
         ].map((stat, idx) => (
@@ -273,7 +241,7 @@ export default function GitHubActivity() {
         <div className="flex flex-wrap items-center justify-between gap-2 mb-4">
           <div className="flex items-center gap-2">
             <span className="font-space text-xs font-bold uppercase tracking-wider text-glow">
-              {user.total_contributions} contributions in the last year
+              {TOTAL_CONTRIBUTIONS} contributions in the last year
             </span>
           </div>
           <span className="font-space text-[10px] opacity-60" style={{ color: "var(--text-muted)" }}>
@@ -283,59 +251,89 @@ export default function GitHubActivity() {
 
         {/* Contribution Graph Wrapper */}
         <div className="p-4 rounded-lg overflow-x-auto relative" style={{ background: "#0d1117", border: "1px solid rgba(255,255,255,0.08)" }}>
-          {/* Tooltip Header if Hovered */}
-          {hoveredDay && (
+          {/* Floating Tooltip */}
+          {hoveredCell && (
             <div
-              className="absolute z-20 px-3 py-1.5 rounded text-xs font-space font-semibold shadow-2xl pointer-events-none transition-all duration-150 -top-2 left-1/2 -translate-x-1/2 -translate-y-full"
+              className="absolute z-30 px-3 py-1.5 rounded text-xs font-space font-semibold shadow-2xl pointer-events-none transition-all duration-75 -translate-x-1/2 -translate-y-full"
               style={{
+                top: `${hoveredCell.y - 8}px`,
+                left: `${hoveredCell.x}px`,
                 background: "#21262d",
                 border: "1px solid #30363d",
                 color: "#e6edf3",
+                whiteSpace: "nowrap",
               }}
             >
-              {hoveredDay.level === 0 ? "No contributions" : `${hoveredDay.level === 1 ? (hoveredDay.date === '2026-03-03' ? '6 contributions' : '1 contribution') : `${hoveredDay.level * 2} contributions`}`} on {formatOrdinalDate(hoveredDay.date)}.
+              {hoveredCell.cell.tooltip}
             </div>
           )}
 
-          <div className="min-w-[720px]">
+          <div className="min-w-[730px] select-none">
             {/* Month Labels Row */}
-            <div className="flex text-[10px] font-space font-medium mb-1 pl-8 relative h-4" style={{ color: "#7d8590" }}>
-              {monthHeaders.map(({ month, colIndex }) => (
-                <span
-                  key={`${month}-${colIndex}`}
-                  className="absolute"
-                  style={{ left: `${32 + colIndex * 13}px` }}
+            <div className="flex text-[10px] font-space font-medium mb-1.5 pl-8" style={{ color: "#7d8590" }}>
+              {GITHUB_MONTH_LABELS.map((item, idx) => (
+                <div
+                  key={`${item.month}-${idx}`}
+                  style={{ width: `${item.colspan * 13}px` }}
+                  className="truncate"
                 >
-                  {month}
-                </span>
+                  {item.month}
+                </div>
               ))}
             </div>
 
             {/* Grid with Day Labels */}
             <div className="flex gap-2">
-              {/* Day of week labels */}
-              <div className="flex flex-col justify-between text-[9px] font-space font-medium py-1 w-6 select-none" style={{ color: "#7d8590", height: "98px" }}>
-                <span className="leading-none pt-[13px]">Mon</span>
-                <span className="leading-none pt-[1px]">Wed</span>
-                <span className="leading-none pt-[1px]">Fri</span>
+              {/* Day of week labels: Rows 0=Sun, 1=Mon, 2=Tue, 3=Wed, 4=Thu, 5=Fri, 6=Sat */}
+              <div
+                className="flex flex-col text-[9px] font-space font-medium w-6 text-left"
+                style={{ color: "#7d8590", gap: "3px" }}
+              >
+                <div className="h-[10px] leading-[10px] opacity-0">Sun</div>
+                <div className="h-[10px] leading-[10px]">Mon</div>
+                <div className="h-[10px] leading-[10px] opacity-0">Tue</div>
+                <div className="h-[10px] leading-[10px]">Wed</div>
+                <div className="h-[10px] leading-[10px] opacity-0">Thu</div>
+                <div className="h-[10px] leading-[10px]">Fri</div>
+                <div className="h-[10px] leading-[10px] opacity-0">Sat</div>
               </div>
 
               {/* 53 Week Columns */}
               <div className="flex gap-[3px]">
-                {weeks.map((week, wi) => (
+                {GITHUB_WEEK_COLUMNS.map((week, wi) => (
                   <div key={wi} className="flex flex-col gap-[3px]">
-                    {week.map((day, di) => (
-                      <div
-                        key={di}
-                        onMouseEnter={() => setHoveredDay(day)}
-                        onMouseLeave={() => setHoveredDay(null)}
-                        className="w-[10px] h-[10px] rounded-[2px] transition-transform hover:scale-125 cursor-pointer"
-                        style={{
-                          background: getDayColor(day.level),
-                          outline: hoveredDay?.date === day.date ? "1px solid rgba(255,255,255,0.4)" : "none",
-                        }}
-                      />
-                    ))}
+                    {week.map((cell, di) => {
+                      if (!cell) {
+                        return (
+                          <div
+                            key={di}
+                            className="w-[10px] h-[10px] rounded-[2px] opacity-0"
+                          />
+                        );
+                      }
+                      return (
+                        <div
+                          key={di}
+                          onMouseEnter={(e) => {
+                            const rect = e.currentTarget.getBoundingClientRect();
+                            const parentRect = e.currentTarget.closest(".relative")?.getBoundingClientRect();
+                            if (parentRect) {
+                              setHoveredCell({
+                                cell,
+                                x: rect.left - parentRect.left + 5,
+                                y: rect.top - parentRect.top,
+                              });
+                            }
+                          }}
+                          onMouseLeave={() => setHoveredCell(null)}
+                          className="w-[10px] h-[10px] rounded-[2px] transition-transform hover:scale-125 cursor-pointer"
+                          style={{
+                            background: getDayColor(cell.level),
+                            outline: hoveredCell?.cell.date === cell.date ? "1px solid rgba(255,255,255,0.6)" : "none",
+                          }}
+                        />
+                      );
+                    })}
                   </div>
                 ))}
               </div>
