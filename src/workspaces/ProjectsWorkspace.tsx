@@ -304,7 +304,7 @@ const PROJECTS: (ProjectData & {
       "Explainable AI (Grad-CAM) Visual Heatmaps",
       "FastAPI Diagnostic Engine & Interactive React Dashboard",
     ],
-    tags: ["FastAPI", "React", "TensorFlow", "PyTorch", "DenseNet", "Explainable AI", "OpenCV"],
+    tags: ["FastAPI", "React", "TensorFlow", "DenseNet", "PyTorch", "Grad-CAM"],
     github: "https://github.com/SowndharyaPL15/Precision-Oncology-CDSS",
     demo: "https://precision-oncology-frontend.onrender.com",
     badge: "AI & Healthcare CDSS",

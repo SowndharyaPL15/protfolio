@@ -39,6 +39,18 @@ const TAG_COLORS: Record<string, string> = {
   "PostgreSQL": "#336791",
   "Redis":      "#dc382d",
   "Node.js":    "#339933",
+  "FastAPI":    "#009688",
+  "React":      "#61dafb",
+  "TensorFlow": "#ff6f00",
+  "DenseNet":   "#0284c7",
+  "Grad-CAM":   "#10b981",
+  "FAISS":      "#8b5cf6",
+  "LangChain":  "#10b981",
+  "LangGraph":  "#f59e0b",
+  "Express":    "#68a063",
+  "Express.js": "#68a063",
+  "Tailwind CSS": "#38bdf8",
+  "Recharts":   "#8884d8",
 };
 
 /** A screenshot placeholder shown when no image file is available */
