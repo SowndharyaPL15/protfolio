@@ -1,9 +1,6 @@
 <table width="100%">
   <tr>
-    <td width="20%" align="center" valign="middle">
-      <img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="115" alt="Developer Animation" style="border-radius: 12px;" />
-    </td>
-    <td width="55%" valign="middle">
+    <td width="75%" valign="middle">
       <p align="left">
         <sub><b>Hi 👋, I'm</b></sub><br/>
         <font size="6"><b>Sowndharya P.L.</b></font><br/>
