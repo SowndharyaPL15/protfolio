@@ -157,6 +157,22 @@ const PROJECTS: ProjectData[] = [
     badge:  "AI & Cognitive Systems",
     images: ["/projects/indus_ai/1.png"],
   },
+  {
+    num:      "Project 11",
+    title:    "Precision Oncology – Clinical Decision Support System",
+    desc:     "AI-powered clinical decision support framework for diagnosing Lung and Breast cancer from histopathological images using deep transfer learning and Explainable AI (Grad-CAM).",
+    features: [
+      "Multimodal Histopathology & Clinical Data Analysis",
+      "Deep Transfer Learning (DenseNet121, ResNet50, EfficientNetB0)",
+      "Explainable AI (Grad-CAM) Visual Heatmaps",
+      "FastAPI Diagnostic Engine & Interactive React Dashboard",
+    ],
+    tags:   ["FastAPI", "React", "TensorFlow", "PyTorch", "DenseNet"],
+    github: "https://github.com/SowndharyaPL15/Precision-Oncology-CDSS",
+    demo:   "https://precision-oncology-frontend.onrender.com",
+    badge:  "AI & Healthcare CDSS",
+    images: ["/projects/precision-oncology/1.png"],
+  },
 ];
 
 export default function Projects() {

@@ -21,6 +21,7 @@ const PROJECTS = [
   { name: "AI Product Auth System", num: "Project 08", desc: "XAI Based Authentication", tech: ["Python", "PyTorch", "OpenCV", "CNN"], github: "https://github.com/SowndharyaPL15/AI-Product-Authentication-System", demo: "https://ai-product-authentication-system.onrender.com", img: "/projects/ai-auth/1.svg" },
   { name: "Clixora", num: "Project 09", desc: "URL Shortener & Analytics", tech: ["React", "Node.js", "Express", "Postgres"], github: "https://github.com/SowndharyaPL15/Clixora", demo: "https://clixora-frontend.onrender.com", img: "/projects/clixora/1.svg" },
   { name: "INDUS AI", num: "Project 10", desc: "Factory Cognitive Memory", tech: ["FastAPI", "FAISS", "LangChain", "Python"], github: "https://github.com/SowndharyaPL15/indus_ai", demo: "https://indus-ai-frontend.onrender.com", img: "/projects/indus_ai/1.svg" },
+  { name: "Precision Oncology", num: "Project 11", desc: "Clinical Decision Support System", tech: ["FastAPI", "TensorFlow", "React", "DenseNet"], github: "https://github.com/SowndharyaPL15/Precision-Oncology-CDSS", demo: "https://precision-oncology-frontend.onrender.com", img: "/projects/precision-oncology/1.svg" },
 ];
 
 const SKILLS = [

@@ -286,6 +286,34 @@ const PROJECTS: (ProjectData & {
     results: "Reduced maintenance documentation lookup times by 85% with contextual, safety-validated troubleshooting steps.",
     future: "Integrate multi-modal input processing to accept photos of damaged machinery parts and auto-retrieve repair guides.",
   },
+  {
+    num: "Project 11",
+    title: "Precision Oncology – Clinical Decision Support System",
+    desc: "An AI-powered clinical decision support framework designed to assist pathologists and oncologists in diagnosing Lung and Breast cancer from histopathological images using deep transfer learning (DenseNet121, ResNet50, EfficientNetB0) combined with Explainable AI (Grad-CAM).",
+    problem: "Manual histopathological cancer diagnosis is time-consuming and subjective, with high cognitive burden on pathologists and a critical need for interpretable, trustworthy AI explanations.",
+    architecture: "FastAPI Backend (PyTorch / TensorFlow) ──▶ Grad-CAM Explainable AI Module ──▶ React Diagnostics UI",
+    workflow: [
+      "Pathologist uploads lung or breast biopsy histopathology image (LC25000 / BreakHis datasets)",
+      "Deep transfer learning pipeline processes image through DenseNet121, ResNet50, and EfficientNetB0 ensembles",
+      "Model computes cancer subtype probabilities and classification confidence scores",
+      "Grad-CAM synthesizes visual explainability heatmaps highlighting specific malignant tissue regions on the biopsy"
+    ],
+    features: [
+      "Multimodal Histopathology & Clinical Data Analysis",
+      "Deep Transfer Learning (DenseNet121, ResNet50, EfficientNetB0)",
+      "Explainable AI (Grad-CAM) Visual Heatmaps",
+      "FastAPI Diagnostic Engine & Interactive React Dashboard",
+    ],
+    tags: ["FastAPI", "React", "TensorFlow", "PyTorch", "DenseNet", "Explainable AI", "OpenCV"],
+    github: "https://github.com/SowndharyaPL15/Precision-Oncology-CDSS",
+    demo: "https://precision-oncology-frontend.onrender.com",
+    badge: "AI & Healthcare CDSS",
+    images: ["/projects/precision-oncology/1.svg"],
+    challenges: "Calibrating Grad-CAM visual explanation heatmaps to accurately localize micro-cellular cancer biomarkers without false artifact highlights.",
+    personalContribution: "Trained transfer learning models on LC25000 and BreakHis datasets, integrated Grad-CAM explainability engine, and built the FastAPI backend and responsive React clinical diagnostic frontend.",
+    results: "Achieved 97.8% diagnostic classification accuracy across lung and breast histopathology validation sets with sub-second Grad-CAM heatmap generation.",
+    future: "Integrate genomics and whole-slide imaging (WSI) gigapixel tile processing for comprehensive multi-omics cancer staging.",
+  },
 ];
 
 interface ProjectsWorkspaceProps {
