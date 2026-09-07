@@ -11,7 +11,7 @@ const KB = {
 
 She is currently pursuing B.E. Computer Science & Engineering (Honours in Blockchain Technology) at Dr. N.G.P Institute of Technology (2023–2027) with a CGPA of 8.35.
 
-She has hands-on experience in full-stack web development, AI/ML systems, mobile apps, IoT, and DevOps — with 10 real-world projects on GitHub.`,
+She has hands-on experience in full-stack web development, AI/ML systems, mobile apps, IoT, and DevOps — with 11 real-world projects on GitHub.`,
 
   skills: `Programming: Java, Python, C
 AI / Machine Learning: PyTorch, OpenCV, CNN, Image Processing, Grad-CAM / XAI

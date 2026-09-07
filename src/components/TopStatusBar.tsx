@@ -72,7 +72,7 @@ export default function TopStatusBar({ mobileOpen, setMobileOpen }: TopStatusBar
             PROJECTS
           </span>
           <div className="flex items-center gap-1">
-            <span className="text-xs lg:text-sm font-bold text-[var(--text-main)]">10</span>
+            <span className="text-xs lg:text-sm font-bold text-[var(--text-main)]">11</span>
             <span className="text-[10px] lg:text-xs text-[var(--text-muted)]">Completed</span>
           </div>
         </div>

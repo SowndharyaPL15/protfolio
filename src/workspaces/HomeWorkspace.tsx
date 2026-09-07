@@ -232,7 +232,7 @@ export default function HomeWorkspace({ setActiveTab, setSelectedProjectNum }: H
       {/* ===== ROW 2: STAT CARDS ===== */}
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2 flex-shrink-0">
         {[
-          { icon: "🚀", v: "10", l: "Projects Completed", c: "var(--accent-primary)" },
+          { icon: "🚀", v: "11", l: "Projects Completed", c: "var(--accent-primary)" },
           { icon: "</>", v: "15+", l: "Technologies Mastered", c: "var(--accent-secondary)" },
           { icon: "📄", v: "2", l: "Certifications & Achievements", c: "var(--accent-tertiary)" },
           { icon: "💼", v: "1", l: "Internship Experience", c: "var(--accent-primary)" },
