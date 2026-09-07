@@ -122,7 +122,7 @@ Arrays · Strings · Hashing · Linked Lists · Trees · Graphs · Greedy · Bac
   <table border="0" style="border: none;">
     <tr style="border: none;">
       <td style="border: none;">
-        <img src="https://github-readme-stats-fast.vercel.app/api?username=SowndharyaPL15&show_icons=true&theme=tokyonight&hide_border=true&bg_color=0d1117" alt="GitHub Stats" width="390" />
+        <img src="https://github-readme-stats-fast.vercel.app/api?username=SowndharyaPL15&show_icons=true&theme=tokyonight&hide_border=true&bg_color=0d1117&hide_rank=true&include_all_commits=true" alt="GitHub Stats" width="390" />
       </td>
       <td style="border: none;">
         <img src="https://streak-stats.demolab.com/?user=SowndharyaPL15&theme=tokyonight&hide_border=true&background=0d1117" alt="GitHub Streak" width="390" />
