@@ -24,7 +24,7 @@ Tools: Git, GitHub, VS Code, Android Studio, Postman, IntelliJ IDEA`,
 2. PharmaTrace AI – Medicine Authentication (Node.js, Express, PostgreSQL, Python, Flask, OpenCV) – github.com/SowndharyaPL15/pharmatrace-ai | Demo: https://pharmatrace-web-server.onrender.com
 3. SmartExpensePro – SMS Expense Tracker (Android, Java, SQLite) – github.com/SowndharyaPL15/SmartExpensePro | Demo: https://smartexpensepro.onrender.com/
 4. Aerial Object Detection – IoT Based (Arduino, Embedded Systems, IoT, C, C++) – Research Paper (2nd Prize)
-5. CivicPulse – Smart Civic Issue Management (PHP, MySQL, JavaScript, Bootstrap) – github.com/SowndharyaPL15/CivicPulse
+5. CivicPulse – Smart Civic Issue Management (PHP, MySQL, JavaScript, Bootstrap) – github.com/SowndharyaPL15/CivicPulse | Demo: https://civicpulse-jq8k.onrender.com
 6. Connectify – Real-Time Chat Application (Laravel, PHP, MySQL, JavaScript, WebSockets) – github.com/SowndharyaPL15/connectify-cartrabbit | Demo: https://connectify-bw2w.onrender.com
 7. ModelHubX – MLOps Registry & Deployment (FastAPI, Kubernetes, Redis, Docker, Next.js) – github.com/SowndharyaPL15/ModelHubX | Demo: https://modelhubx-1.onrender.com/
 8. AI Product Authentication System (Python, PyTorch, OpenCV, CNN, React) – github.com/SowndharyaPL15/AI-Product-Authentication-System | Demo: https://ai-product-authentication-system.onrender.com

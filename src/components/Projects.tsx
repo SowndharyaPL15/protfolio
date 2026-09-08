@@ -76,6 +76,7 @@ const PROJECTS: ProjectData[] = [
     ],
     tags:   ["PHP", "MySQL", "JavaScript", "Bootstrap"],
     github: "https://github.com/SowndharyaPL15/CivicPulse",
+    demo:   "https://civicpulse-jq8k.onrender.com",
     images: ["/projects/civicpulse/1.png"],
   },
   {

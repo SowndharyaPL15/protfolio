@@ -140,6 +140,7 @@ const PROJECTS: (ProjectData & {
       "Duplicate detection & auto assignment",
     ],
     tags: ["PHP", "MySQL", "JavaScript", "Bootstrap", "HTML/CSS"],
+    demo: "https://civicpulse-jq8k.onrender.com",
     github: "https://github.com/SowndharyaPL15/CivicPulse",
     images: ["/projects/civicpulse/1.svg"],
     challenges: "Designing an efficient spatial query to prevent duplicate tickets within a 50-meter radius.",
