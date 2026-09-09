@@ -27,7 +27,7 @@ export interface ContributionDay {
 }
 
 export const REAL_GITHUB_USER: GitHubUser = {
-  "public_repos": 14,
+  "public_repos": 15,
   "followers": 0,
   "following": 0,
   "bio": "Motivated Computer Science Engineering student and Full-Stack Developer passionate about building modern web applications and artificial intelligence solutions.",
@@ -36,6 +36,21 @@ export const REAL_GITHUB_USER: GitHubUser = {
 };
 
 export const REAL_GITHUB_REPOS: GitHubRepo[] = [
+  {
+    "name": "Automated-Aerial-Object-Detection",
+    "description": "Automated aerial object detection and monitoring system using AI and IoT to detect drones and aerial objects in restricted areas.",
+    "html_url": "https://github.com/SowndharyaPL15/Automated-Aerial-Object-Detection",
+    "language": "C++",
+    "stargazers_count": 0,
+    "forks_count": 0,
+    "updated_at": "2026-09-09T06:30:00Z",
+    "topics": [
+      "ai",
+      "iot",
+      "arduino",
+      "drone-detection"
+    ]
+  },
   {
     "name": "protfolio",
     "description": "Interactive personal developer portfolio IDE built with Next.js, TypeScript, Tailwind CSS, and Framer Motion.",

@@ -23,7 +23,7 @@ Tools: Git, GitHub, VS Code, Android Studio, Postman, IntelliJ IDEA`,
   projects: `1. CuraNet – Caregiver Support System (HTML, CSS, JS, PostgreSQL) – github.com/SowndharyaPL15/CuraNet | Demo: https://curanet-mj06.onrender.com/
 2. PharmaTrace AI – Medicine Authentication (Node.js, Express, PostgreSQL, Python, Flask, OpenCV) – github.com/SowndharyaPL15/pharmatrace-ai | Demo: https://pharmatrace-web-server.onrender.com
 3. SmartExpensePro – SMS Expense Tracker (Android, Java, SQLite) – github.com/SowndharyaPL15/SmartExpensePro | Demo: https://smartexpensepro.onrender.com/
-4. Aerial Object Detection – IoT Based (Arduino, Embedded Systems, IoT, C, C++) – Research Paper (2nd Prize)
+4. Automated Aerial Object Detection – IoT & AI (Arduino, Embedded Systems, IoT, C, C++) – github.com/SowndharyaPL15/Automated-Aerial-Object-Detection | Demo: https://www.tinkercad.com/things/3HbPGczwYv0-automated-aerial-object-detection?sharecode=FA4-ENWj_yRSs6VpOnL5FjKiSQH9pYLQxryuBFYuDFs | Research Paper (2nd Prize)
 5. CivicPulse – Smart Civic Issue Management (PHP, MySQL, JavaScript, Bootstrap) – github.com/SowndharyaPL15/CivicPulse | Demo: https://civicpulse-jq8k.onrender.com
 6. Connectify – Real-Time Chat Application (Laravel, PHP, MySQL, JavaScript, WebSockets) – github.com/SowndharyaPL15/connectify-cartrabbit | Demo: https://connectify-bw2w.onrender.com
 7. ModelHubX – MLOps Registry & Deployment (FastAPI, Kubernetes, Redis, Docker, Next.js) – github.com/SowndharyaPL15/ModelHubX | Demo: https://modelhubx-1.onrender.com/

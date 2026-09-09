@@ -47,6 +47,7 @@ const LANGUAGE_OVERRIDES: Record<string, string> = {
   "connectify": "PHP",
   "leetcode-solution": "Java",
   "leetcode-tracker": "Java",
+  "Automated-Aerial-Object-Detection": "C++",
 };
 
 const CARD_ANIM = {
@@ -196,7 +197,7 @@ export default function GitHubActivity() {
               TOP LANGUAGES &amp; TECH STACK
             </span>
             <span className="font-space text-[9px]" style={{ color: "var(--text-muted)" }}>
-              14 Repositories Total
+              {repos.length} Repositories Total
             </span>
           </div>
           <div className="space-y-2">
@@ -374,7 +375,7 @@ export default function GitHubActivity() {
             className="font-space text-[10px] uppercase tracking-widest font-bold"
             style={{ color: "var(--text-muted)" }}
           >
-            ALL 14 REPOSITORIES
+            ALL {repos.length} REPOSITORIES
           </span>
           <span className="font-space text-[9px]" style={{ color: "var(--accent-primary)" }}>
             Public &amp; Open Source
