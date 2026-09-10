@@ -363,10 +363,6 @@ export default function ProjectsWorkspace({ selectedProjectNum, setSelectedProje
                   Explore 8 production &amp; research systems across AI, Full-Stack, Blockchain, and IoT.
                 </p>
               </div>
-              <div className="font-space text-xs px-3 py-1.5 rounded-lg flex items-center gap-2" style={{ background: "var(--glow-xs)", border: "1px solid var(--border-accent)", color: "var(--accent-primary)" }}>
-                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
-                <span>8 SYSTEMS DEPLOYED</span>
-              </div>
             </div>
 
             {/* Grid 2 rows x 4 columns on large viewport */}
