@@ -86,7 +86,7 @@ export default function AITerminal() {
       setIsTyping(false);
       setLastBotMsg(reply.split("\n")[0]);
       setMessages((p) => [...p, { role: "bot", text: reply, ts: Date.now() }]);
-    }, 400 + Math.random() * 300);
+    }, 100);
   }, [input]);
 
   return (

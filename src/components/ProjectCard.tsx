@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useRef, useCallback } from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 
 export interface ProjectData {
@@ -162,50 +162,17 @@ function ImageCarousel({ images, title }: { images: string[]; title: string }) {
 }
 
 export default function ProjectCard({ project, index = 0 }: ProjectCardProps) {
-  const cardRef = useRef<HTMLDivElement>(null);
-
-  // Subtle card tilt on mouse move
-  const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
-    const card = cardRef.current;
-    if (!card) return;
-    const rect  = card.getBoundingClientRect();
-    const x     = (e.clientX - rect.left) / rect.width  - 0.5;
-    const y     = (e.clientY - rect.top)  / rect.height - 0.5;
-    card.style.transform = `perspective(800px) rotateY(${x * 6}deg) rotateX(${-y * 6}deg) scale(1.02)`;
-  }, []);
-
-  const handleMouseLeave = useCallback(() => {
-    const card = cardRef.current;
-    if (card) {
-      card.style.transform = "perspective(800px) rotateY(0deg) rotateX(0deg) scale(1)";
-      card.style.borderColor = "";
-      card.style.boxShadow   = "";
-    }
-  }, []);
-
   const hasImages = (project.images ?? []).length > 0;
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 32 }}
+      initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay: index * 0.07, ease: [0.25, 0.46, 0.45, 0.94] }}
+      transition={{ duration: 0.2, delay: Math.min(index * 0.02, 0.1), ease: "easeOut" }}
+      className="h-full"
     >
       <div
-        ref={cardRef}
-        onMouseMove={handleMouseMove}
-        onMouseLeave={handleMouseLeave}
-        className="cyber-panel rounded-xl overflow-hidden relative group h-full flex flex-col"
-        style={{
-          transition: "transform 0.12s ease, border-color 0.2s ease, box-shadow 0.2s ease",
-          willChange: "transform",
-        }}
-        onMouseEnter={() => {
-          if (cardRef.current) {
-            cardRef.current.style.borderColor = "var(--border-accent)";
-            cardRef.current.style.boxShadow   = "0 0 30px var(--glow-sm)";
-          }
-        }}
+        className="cyber-panel rounded-xl overflow-hidden relative group h-full flex flex-col transition-all duration-200 hover:border-[var(--border-accent)] hover:shadow-[0_0_20px_var(--glow-sm)] hover:-translate-y-0.5"
       >
         {/* Corner accent */}
         <div

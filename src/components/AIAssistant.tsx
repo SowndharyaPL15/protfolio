@@ -160,7 +160,7 @@ export default function AIAssistant() {
       setIsTyping(true);
 
       const intent = detectIntent(msg);
-      const delay = 500 + Math.random() * 400;
+      const delay = 100;
 
       setTimeout(() => {
         setIsTyping(false);

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import HolographicOrb from "@/components/HolographicOrb";
 import RadarChart from "@/components/RadarChart";
 
@@ -9,6 +9,35 @@ const ROLES = [
   "AI Engineer | Blockchain Developer | IoT Researcher",
   "Machine Learning Engineer | Deep Learning Specialist",
 ];
+
+function HeroRoleTypewriter() {
+  const [roleIdx, setRoleIdx] = useState(0);
+  const [displayed, setDisplayed] = useState("");
+  const [deleting, setDeleting] = useState(false);
+
+  useEffect(() => {
+    const current = ROLES[roleIdx];
+    let timer: ReturnType<typeof setTimeout>;
+    if (!deleting && displayed.length < current.length) {
+      timer = setTimeout(() => setDisplayed(current.slice(0, displayed.length + 1)), 40);
+    } else if (!deleting && displayed.length === current.length) {
+      timer = setTimeout(() => setDeleting(true), 2000);
+    } else if (deleting && displayed.length > 0) {
+      timer = setTimeout(() => setDisplayed(current.slice(0, displayed.length - 1)), 20);
+    } else if (deleting && displayed.length === 0) {
+      setDeleting(false);
+      setRoleIdx((i) => (i + 1) % ROLES.length);
+    }
+    return () => clearTimeout(timer);
+  }, [displayed, deleting, roleIdx]);
+
+  return (
+    <div className="font-space text-xs font-bold mb-2" style={{ minHeight: "1.25rem", color: "var(--accent-secondary)" }}>
+      {displayed}
+      <span className="inline-block w-0.5 h-3 ml-0.5 align-middle animate-pulse" style={{ background: "var(--accent-primary)" }} />
+    </div>
+  );
+}
 
 const PROJECTS = [
   { name: "CuraNet", num: "Project 01", desc: "Caregiver Support System", tech: ["HTML", "CSS", "JS", "PostgreSQL"], github: "https://github.com/SowndharyaPL15/CuraNet", demo: "https://curanet-mj06.onrender.com/", img: "/projects/curanet/1.svg" },
@@ -58,18 +87,12 @@ const TECH_STACK = [
   { name: "OpenCV", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/opencv/opencv-original.svg", fallback: "CV", color: "#5c3ee8", darkInvert: false },
 ];
 
-
 interface HomeWorkspaceProps {
   setActiveTab?: (tab: string) => void;
   setSelectedProjectNum?: (num: string | null) => void;
 }
 
 export default function HomeWorkspace({ setActiveTab, setSelectedProjectNum }: HomeWorkspaceProps) {
-  const [roleIdx, setRoleIdx] = useState(0);
-  const [displayed, setDisplayed] = useState("");
-  const [deleting, setDeleting] = useState(false);
-  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-
   const [githubRepos, setGithubRepos] = useState<number | string>("12");
   const [githubContribs, setGithubContribs] = useState<number | string>("734");
 
@@ -89,27 +112,7 @@ export default function HomeWorkspace({ setActiveTab, setSelectedProjectNum }: H
     return () => { active = false; };
   }, []);
 
-  const getContributionLevel = (dayIdx: number, weekIdx: number) => {
-    const d = new Date();
-    const daysAgo = (52 - weekIdx) * 7 + (6 - dayIdx);
-    d.setDate(d.getDate() - daysAgo);
-    
-    // Check if the date is before March 1, 2026
-    if (d < new Date("2026-03-01")) {
-      return 0; // Empty/No contributions
-    }
-    
-    // Generate deterministic contributions for dates after March 1
-    const seed = dayIdx * 31 + weekIdx * 17;
-    const rand = (seed % 100) / 100;
-    if (rand < 0.25) return 0;
-    if (rand < 0.6) return 1;
-    if (rand < 0.8) return 2;
-    if (rand < 0.93) return 3;
-    return 4;
-  };
-
-  const getHeaderMonths = () => {
+  const headerMonths = useMemo(() => {
     const cols = 53;
     const months: { label: string; index: number }[] = [];
     let lastMonth = -1;
@@ -126,22 +129,25 @@ export default function HomeWorkspace({ setActiveTab, setSelectedProjectNum }: H
       }
     }
     return months;
-  };
+  }, []);
 
-  useEffect(() => {
-    const current = ROLES[roleIdx];
-    if (!deleting && displayed.length < current.length) {
-      timerRef.current = setTimeout(() => setDisplayed(current.slice(0, displayed.length + 1)), 40);
-    } else if (!deleting && displayed.length === current.length) {
-      timerRef.current = setTimeout(() => setDeleting(true), 2000);
-    } else if (deleting && displayed.length > 0) {
-      timerRef.current = setTimeout(() => setDisplayed(current.slice(0, displayed.length - 1)), 20);
-    } else if (deleting && displayed.length === 0) {
-      setDeleting(false);
-      setRoleIdx((i) => (i + 1) % ROLES.length);
-    }
-    return () => { if (timerRef.current) clearTimeout(timerRef.current); };
-  }, [displayed, deleting, roleIdx]);
+  const contributionGrid = useMemo(() => {
+    return Array.from({ length: 7 }).map((_, ri) => {
+      return Array.from({ length: 53 }).map((_, ci) => {
+        const d = new Date();
+        const daysAgo = (52 - ci) * 7 + (6 - ri);
+        d.setDate(d.getDate() - daysAgo);
+        if (d < new Date("2026-03-01")) return 0;
+        const seed = ri * 31 + ci * 17;
+        const rand = (seed % 100) / 100;
+        if (rand < 0.25) return 0;
+        if (rand < 0.6) return 1;
+        if (rand < 0.8) return 2;
+        if (rand < 0.93) return 3;
+        return 4;
+      });
+    });
+  }, []);
 
   const go = (tab: string) => setActiveTab && setActiveTab(tab);
 
@@ -162,10 +168,7 @@ export default function HomeWorkspace({ setActiveTab, setSelectedProjectNum }: H
               <span className="text-glow">Sowndharya</span>{" "}
               <span style={{ color: "var(--text-main)" }}>P.L.</span>
             </h1>
-            <div className="font-space text-xs font-bold mb-2" style={{ minHeight: "1.25rem", color: "var(--accent-secondary)" }}>
-              {displayed}
-              <span className="inline-block w-0.5 h-3 ml-0.5 align-middle animate-pulse" style={{ background: "var(--accent-primary)" }} />
-            </div>
+            <HeroRoleTypewriter />
             <p className="text-xs mb-3 max-w-sm leading-relaxed" style={{ color: "var(--text-muted)" }}>
               Building scalable, user-centric applications with a passion for clean code and meaningful experiences.
             </p>
@@ -416,7 +419,7 @@ export default function HomeWorkspace({ setActiveTab, setSelectedProjectNum }: H
               <div className="min-w-[280px]">
                 {/* Month Labels Header */}
                 <div className="relative w-full h-3 mb-1">
-                  {getHeaderMonths().map((m, idx) => (
+                  {headerMonths.map((m, idx) => (
                     <div
                       key={idx}
                       className="absolute font-space text-[5.5px]"
@@ -433,7 +436,7 @@ export default function HomeWorkspace({ setActiveTab, setSelectedProjectNum }: H
                 
                 {/* Heatmap Grid */}
                 <div className="flex flex-col gap-[1px]">
-                  {Array.from({ length: 7 }).map((_, ri) => {
+                  {contributionGrid.map((row, ri) => {
                     const dayLabel = ri === 1 ? "Mon" : ri === 3 ? "Wed" : ri === 5 ? "Fri" : "";
                     return (
                       <div key={ri} className="flex items-center gap-[2px]">
@@ -441,8 +444,7 @@ export default function HomeWorkspace({ setActiveTab, setSelectedProjectNum }: H
                           {dayLabel}
                         </div>
                         <div className="flex gap-[1px] flex-1">
-                          {Array.from({ length: 53 }).map((_, ci) => {
-                            const level = getContributionLevel(ri, ci);
+                          {row.map((level, ci) => {
                             let bg = "rgba(255, 255, 255, 0.05)";
                             if (level === 1) bg = "#0e4429";
                             else if (level === 2) bg = "#006d32";

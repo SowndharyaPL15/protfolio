@@ -22,11 +22,11 @@ import ContactWorkspace from "@/workspaces/ContactWorkspace";
 const BootScreen = dynamic(() => import("@/components/BootScreen"), { ssr: false });
 const CommandPalette = dynamic(() => import("@/components/CommandPalette"), { ssr: false });
 
-/* OS Workspace transition animation: scale + blur + fade (350ms) */
+/* OS Workspace transition animation: Snappy GPU-accelerated crossfade (150ms) */
 const WORKSPACE_VARIANTS = {
-  initial: { opacity: 0, scale: 0.97, filter: "blur(4px)" },
-  animate: { opacity: 1, scale: 1, filter: "blur(0px)" },
-  exit: { opacity: 0, scale: 1.01, filter: "blur(2px)" },
+  initial: { opacity: 0, y: 4 },
+  animate: { opacity: 1, y: 0 },
+  exit: { opacity: 0, y: -4 },
 };
 
 export default function Home() {
@@ -106,7 +106,7 @@ export default function Home() {
                 initial="initial"
                 animate="animate"
                 exit="exit"
-                transition={{ duration: 0.35, ease: [0.25, 0.46, 0.45, 0.94] }}
+                transition={{ duration: 0.15, ease: "easeOut" }}
                 className="h-full w-full overflow-hidden"
               >
                 {activeTab === "home" && <HomeWorkspace setActiveTab={setActiveTab} setSelectedProjectNum={setSelectedProjectNum} />}
@@ -124,7 +124,7 @@ export default function Home() {
         </div>
 
         {/* PERMANENT BOTTOM AI TERMINAL BAR */}
-        {bootDone && <AIAssistant />}
+        <AIAssistant />
       </div>
     </>
   );

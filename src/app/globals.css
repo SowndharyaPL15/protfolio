@@ -122,15 +122,13 @@ body::before {
    ===================================================== */
 .cyber-panel {
   background:       var(--bg-card);
-  backdrop-filter:  blur(12px);
-  -webkit-backdrop-filter: blur(12px);
   border:           1px solid var(--border-subtle);
   box-shadow:       0 0 15px var(--glow-xs);
-  transition:       border-color 0.2s ease, box-shadow 0.2s ease, background 0.3s ease;
+  transition:       border-color 0.15s ease, box-shadow 0.15s ease, background 0.2s ease;
 }
 .cyber-panel-glow {
   border-color: var(--border-accent) !important;
-  box-shadow:   0 0 30px var(--glow-sm), 0 0 60px var(--glow-xs) !important;
+  box-shadow:   0 0 20px var(--glow-sm), 0 0 40px var(--glow-xs) !important;
 }
 
 .cyber-button {
