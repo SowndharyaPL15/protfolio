@@ -127,11 +127,31 @@ const SAMPLE_CASES: PatientCase[] = [
 
 export default function PrecisionOncologyReport() {
   const [selectedCaseIndex, setSelectedCaseIndex] = useState(0);
-  const [heatmapOverlay, setHeatmapOverlay] = useState(true);
   const [activeTab, setActiveTab] = useState<"clinical" | "biomarkers" | "xai" | "audit">("clinical");
   const [isPrinting, setIsPrinting] = useState(false);
 
+  /* Grad-CAM Full-Image Visualization Controls */
+  const [xaiViewMode, setXaiViewMode] = useState<"original" | "heatmap" | "overlay">("overlay");
+  const [heatmapOpacity, setHeatmapOpacity] = useState<number>(60);
+  const [blendMode, setBlendMode] = useState<string>("normal");
+  const [zoomLevel, setZoomLevel] = useState<number>(1);
+
   const currentCase = SAMPLE_CASES[selectedCaseIndex];
+
+  const handleResetZoom = () => {
+    setZoomLevel(1);
+  };
+
+  const handleToggleZoom = () => {
+    setZoomLevel((prev) => (prev >= 2 ? 1 : prev + 0.5));
+  };
+
+  const handleResetAll = () => {
+    setZoomLevel(1);
+    setHeatmapOpacity(60);
+    setBlendMode("normal");
+    setXaiViewMode("overlay");
+  };
 
   const handlePrint = () => {
     setIsPrinting(true);
@@ -431,115 +451,282 @@ export default function PrecisionOncologyReport() {
             initial={{ opacity: 0, y: 6 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.2 }}
-            className="space-y-4 pt-4"
+            className="space-y-4 pt-2"
           >
-            <div className="flex items-center justify-between">
-              <div>
-                <h3 className="font-space text-sm font-bold uppercase tracking-wider text-gray-800 dark:text-gray-200">
-                  Histopathology Grad-CAM Visual Attention Map
-                </h3>
-                <p className="font-space text-xs text-gray-500">
-                  Explainable AI (XAI) heatmap highlighting cellular features influencing neural classification
-                </p>
-              </div>
-
-              <button
-                onClick={() => setHeatmapOverlay(!heatmapOverlay)}
-                className="font-space text-xs px-3 py-1.5 rounded-lg font-bold border border-theme flex items-center gap-2 transition-all hover:bg-[var(--glow-sm)]"
-                style={{ color: heatmapOverlay ? "#ef4444" : "var(--text-main)" }}
-              >
-                <span>{heatmapOverlay ? "Heatmap: ACTIVE (ON)" : "Heatmap: RAW (OFF)"}</span>
-              </button>
-            </div>
-
-            {/* Interactive Biopsy Viewer */}
-            <div className="grid grid-cols-1 md:grid-cols-12 gap-4">
-              <div className="md:col-span-7 rounded-xl overflow-hidden border border-[var(--border-subtle)] relative aspect-[16/10] bg-black">
-                {/* SVG Histopathology simulation */}
-                <svg viewBox="0 0 400 250" className="w-full h-full">
-                  <defs>
-                    <radialGradient id="gradcamHeat" cx="50%" cy="50%" r="45%">
-                      <stop offset="0%" stopColor="#ef4444" stopOpacity={heatmapOverlay ? 0.85 : 0} />
-                      <stop offset="45%" stopColor="#f59e0b" stopOpacity={heatmapOverlay ? 0.6 : 0} />
-                      <stop offset="75%" stopColor="#10b981" stopOpacity={heatmapOverlay ? 0.3 : 0} />
-                      <stop offset="100%" stopColor="#3b82f6" stopOpacity="0" />
-                    </radialGradient>
-                  </defs>
-
-                  {/* Microscopic Tissue Background (H&E stain purple/pink simulation) */}
-                  <rect width="400" height="250" fill="#2d1b4e" />
-
-                  {/* Cellular Morphology Stroma */}
-                  <g opacity="0.6" stroke="#c084fc" strokeWidth="1">
-                    {Array.from({ length: 24 }).map((_, i) => (
-                      <circle
-                        key={i}
-                        cx={(i * 37) % 380 + 15}
-                        cy={(i * 29) % 230 + 15}
-                        r={12 + (i % 7)}
-                        fill="#581c87"
-                        opacity="0.7"
-                      />
-                    ))}
-                  </g>
-
-                  {/* Malignant Squamous Cell Nest */}
-                  <g transform="translate(190, 120)">
-                    <circle cx="0" cy="0" r="55" fill="#7e22ce" stroke="#e879f9" strokeWidth="2" />
-                    <circle cx="-15" cy="-10" r="18" fill="#9333ea" />
-                    <circle cx="15" cy="15" r="22" fill="#a855f7" />
-                    <circle cx="0" cy="0" r="12" fill="#fdf4ff" opacity="0.9" />
-                  </g>
-
-                  {/* Grad-CAM Heatmap Overlay */}
-                  <circle cx="200" cy="125" r="85" fill="url(#gradcamHeat)" />
-
-                  {/* Crosshairs & Bounding Reticle */}
-                  {heatmapOverlay && (
-                    <g stroke="#38bdf8" strokeWidth="1.5" strokeDasharray="3,3">
-                      <rect x="135" y="60" width="130" height="130" rx="8" fill="none" />
-                      <line x1="200" y1="45" x2="200" y2="205" strokeWidth="0.8" />
-                      <line x1="120" y1="125" x2="280" y2="125" strokeWidth="0.8" />
-                    </g>
-                  )}
-                </svg>
-
-                {/* Live Floating Telemetry on Image */}
-                <div className="absolute bottom-2 left-2 px-2.5 py-1 rounded bg-black/75 backdrop-blur text-white font-space text-[10px]">
-                  <span>Mag: 400× | H&amp;E Stain | Tile: LLL_B04</span>
+            {/* Explainable AI Visualizer Card matching reference UI */}
+            <div
+              className="rounded-2xl p-4 md:p-6 border space-y-4 transition-all"
+              style={{
+                background: "var(--bg-surface)",
+                borderColor: "var(--border-accent)",
+              }}
+            >
+              {/* Card Header with Controls */}
+              <div className="flex flex-wrap items-center justify-between gap-3 pb-2 border-b border-[var(--border-subtle)]">
+                <div className="flex items-center gap-2.5">
+                  <div className="w-5 h-5 rounded-full bg-red-500/20 text-red-500 border border-red-500/40 flex items-center justify-center text-xs font-bold shadow-[0_0_8px_rgba(239,68,68,0.4)]">
+                    ✓
+                  </div>
+                  <h3 className="font-space text-base md:text-lg font-bold text-gray-900 dark:text-gray-100">
+                    Explainable AI (Grad-CAM Visualizations)
+                  </h3>
                 </div>
-                <div className="absolute top-2 right-2 px-2.5 py-1 rounded bg-red-600/90 text-white font-space text-[10px] font-bold">
-                  <span>Grad-CAM Peak: 0.942</span>
+
+                <div className="flex items-center gap-2 font-space text-xs">
+                  <button
+                    onClick={handleResetAll}
+                    title="Reset All Controls"
+                    className="w-8 h-8 rounded-lg border border-[var(--border-subtle)] hover:border-[var(--accent-primary)] hover:bg-[var(--glow-xs)] text-[var(--text-muted)] hover:text-main flex items-center justify-center transition-all"
+                  >
+                    ↺
+                  </button>
+                  <button
+                    onClick={handleToggleZoom}
+                    title="Toggle Zoom Magnification"
+                    className="w-8 h-8 rounded-lg border border-[var(--border-subtle)] hover:border-[var(--accent-primary)] hover:bg-[var(--glow-xs)] text-[var(--text-muted)] hover:text-main flex items-center justify-center transition-all"
+                  >
+                    🔍
+                  </button>
+                  <button
+                    onClick={handleResetZoom}
+                    className="px-3 py-1.5 rounded-lg border border-[var(--border-subtle)] hover:border-[var(--accent-primary)] text-[var(--text-muted)] hover:text-main font-semibold transition-all text-xs"
+                  >
+                    Reset Zoom {zoomLevel > 1 ? `(${zoomLevel}x)` : ""}
+                  </button>
                 </div>
               </div>
 
-              {/* XAI Explanation Details */}
-              <div
-                className="md:col-span-5 p-4 rounded-xl flex flex-col justify-between space-y-3"
-                style={{ background: "var(--bg-surface)", border: "1px solid var(--border-subtle)" }}
-              >
-                <div>
-                  <span className="font-space text-[10px] uppercase tracking-widest text-blue-500 font-bold block mb-1">
-                    AI ATTENTION INTERPRETATION
-                  </span>
-                  <div className="space-y-2 font-space text-xs text-gray-700 dark:text-gray-300">
-                    <div>
-                      <span className="text-gray-500 text-[10px] block">Model Architecture:</span>
-                      <span className="font-bold">{currentCase.gradCamDetails.model}</span>
-                    </div>
-                    <div>
-                      <span className="text-gray-500 text-[10px] block">Cellular Morphology Features:</span>
-                      <p className="text-[11px] leading-relaxed mt-0.5">{currentCase.gradCamDetails.cellularFeatures}</p>
-                    </div>
-                    <div>
-                      <span className="text-gray-500 text-[10px] block">Heatmap Target Region:</span>
-                      <p className="text-[11px] leading-relaxed mt-0.5 text-amber-600 dark:text-amber-400 font-semibold">{currentCase.gradCamDetails.heatmapFocus}</p>
-                    </div>
+              {/* Mode Segmented Switcher Pills */}
+              <div className="flex justify-center">
+                <div
+                  className="inline-flex p-1 rounded-xl border border-[var(--border-subtle)]"
+                  style={{ background: "var(--bg-base)" }}
+                >
+                  <button
+                    onClick={() => setXaiViewMode("original")}
+                    className="px-4 py-1.5 rounded-lg font-space text-xs font-bold flex items-center gap-2 transition-all"
+                    style={{
+                      background: xaiViewMode === "original" ? "var(--accent-primary)" : "transparent",
+                      color: xaiViewMode === "original" ? "#000" : "var(--text-muted)",
+                    }}
+                  >
+                    <span>🖼️</span>
+                    <span>Original Slide</span>
+                  </button>
+                  <button
+                    onClick={() => setXaiViewMode("heatmap")}
+                    className="px-4 py-1.5 rounded-lg font-space text-xs font-bold flex items-center gap-2 transition-all"
+                    style={{
+                      background: xaiViewMode === "heatmap" ? "var(--accent-primary)" : "transparent",
+                      color: xaiViewMode === "heatmap" ? "#000" : "var(--text-muted)",
+                    }}
+                  >
+                    <span>🌡️</span>
+                    <span>Heatmap</span>
+                  </button>
+                  <button
+                    onClick={() => setXaiViewMode("overlay")}
+                    className="px-4 py-1.5 rounded-lg font-space text-xs font-bold flex items-center gap-2 transition-all"
+                    style={{
+                      background: xaiViewMode === "overlay" ? "var(--accent-primary)" : "transparent",
+                      color: xaiViewMode === "overlay" ? "#000" : "var(--text-muted)",
+                    }}
+                  >
+                    <span>🔍</span>
+                    <span>Overlay</span>
+                  </button>
+                </div>
+              </div>
+
+              {/* Main Full-Bleed Histopathology & Grad-CAM Canvas (100% Edge-to-Edge Coverage) */}
+              <div className="w-full flex justify-center">
+                <div
+                  className="w-full max-w-3xl aspect-[16/10] rounded-xl overflow-hidden relative border border-[var(--border-subtle)] shadow-2xl bg-[#0f172a]"
+                  style={{ cursor: zoomLevel > 1 ? "grab" : "default" }}
+                >
+                  <div
+                    className="w-full h-full relative transition-transform duration-300 origin-center"
+                    style={{ transform: `scale(${zoomLevel})` }}
+                  >
+                    {/* Layer 1: High-Definition Histopathology Micrograph (100% Full Cover) */}
+                    {(xaiViewMode === "original" || xaiViewMode === "overlay") && (
+                      <div className="absolute inset-0 w-full h-full">
+                        <img
+                          src="/projects/precision-oncology/slide_sri.jpg"
+                          alt="H&E Histopathology Microscopic Slide"
+                          className="w-full h-full object-cover select-none"
+                          onError={(e) => {
+                            // High-fidelity fallback SVG if file is unavailable
+                            (e.target as HTMLElement).style.display = "none";
+                          }}
+                        />
+
+                        {/* High-Fidelity Microscopic Cells Fallback / Ambient Overlay */}
+                        <svg viewBox="0 0 800 500" preserveAspectRatio="none" className="absolute inset-0 w-full h-full pointer-events-none opacity-40 mix-blend-multiply">
+                          <rect width="800" height="500" fill="#4a044e" opacity="0.6" />
+                          <g fill="#c026d3" opacity="0.4">
+                            {Array.from({ length: 48 }).map((_, i) => (
+                              <circle
+                                key={i}
+                                cx={(i * 67) % 760 + 20}
+                                cy={(i * 53) % 460 + 20}
+                                r={16 + (i % 12)}
+                              />
+                            ))}
+                          </g>
+                        </svg>
+                      </div>
+                    )}
+
+                    {/* Layer 2: Full-Image Grad-CAM Heatmap (Covers 100% of entire image edge-to-edge) */}
+                    {(xaiViewMode === "heatmap" || xaiViewMode === "overlay") && (
+                      <div
+                        className="absolute inset-0 w-full h-full pointer-events-none transition-all duration-200"
+                        style={{
+                          opacity: xaiViewMode === "heatmap" ? 1 : heatmapOpacity / 100,
+                          mixBlendMode: xaiViewMode === "heatmap" ? "normal" : (blendMode as any),
+                        }}
+                      >
+                        {/* 100% Full-Frame Thermal Vector Gradient Field spanning the entire width and height */}
+                        <svg viewBox="0 0 800 500" preserveAspectRatio="none" className="w-full h-full">
+                          <defs>
+                            {/* Primary Core Lesion Activation (Red Center ➔ Yellow ➔ Green ➔ Cyan ➔ Deep Blue Field) */}
+                            <radialGradient id="gradcamFullEdge1" cx="50%" cy="50%" r="55%">
+                              <stop offset="0%" stopColor="#ef4444" stopOpacity="0.98" />
+                              <stop offset="25%" stopColor="#f59e0b" stopOpacity="0.88" />
+                              <stop offset="50%" stopColor="#10b981" stopOpacity="0.75" />
+                              <stop offset="72%" stopColor="#06b6d4" stopOpacity="0.60" />
+                              <stop offset="90%" stopColor="#3b82f6" stopOpacity="0.45" />
+                              <stop offset="100%" stopColor="#1e1b4b" stopOpacity="0.30" />
+                            </radialGradient>
+
+                            {/* Secondary Infiltrative Cellular Activation Field */}
+                            <radialGradient id="gradcamFullEdge2" cx="75%" cy="65%" r="45%">
+                              <stop offset="0%" stopColor="#f43f5e" stopOpacity="0.85" />
+                              <stop offset="35%" stopColor="#fbbf24" stopOpacity="0.65" />
+                              <stop offset="70%" stopColor="#06b6d4" stopOpacity="0.40" />
+                              <stop offset="100%" stopColor="#3b82f6" stopOpacity="0" />
+                            </radialGradient>
+
+                            {/* Gaussian Soft Smoothing for Clinical XAI Heatmap */}
+                            <filter id="gradcamThermalBlur" x="-10%" y="-10%" width="120%" height="120%">
+                              <feGaussianBlur stdDeviation="28" />
+                            </filter>
+                          </defs>
+
+                          {/* Base full-width ambient thermal layer */}
+                          <rect width="800" height="500" fill="#1e1b4b" opacity="0.35" />
+
+                          {/* Primary full-bleed heatmap covering 100% of entire image */}
+                          <rect
+                            width="800"
+                            height="500"
+                            fill="url(#gradcamFullEdge1)"
+                            filter="url(#gradcamThermalBlur)"
+                          />
+
+                          {/* Secondary lateral infiltration hotspot covering right quadrant */}
+                          <ellipse
+                            cx="600"
+                            cy="325"
+                            rx="280"
+                            ry="200"
+                            fill="url(#gradcamFullEdge2)"
+                            filter="url(#gradcamThermalBlur)"
+                          />
+                        </svg>
+                      </div>
+                    )}
+
+                    {/* Reticle / Bounding Indicators (when overlay or original active) */}
+                    {xaiViewMode === "overlay" && (
+                      <div className="absolute inset-0 pointer-events-none border border-cyan-400/20" />
+                    )}
+                  </div>
+
+                  {/* On-Slide Microscopic Metadata Badges */}
+                  <div className="absolute top-3 left-3 px-2.5 py-1 rounded-md bg-black/75 backdrop-blur font-space text-[10px] text-white flex items-center gap-2 border border-white/10 shadow-lg">
+                    <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                    <span>DenseNet-121 XAI · 400× H&amp;E Stain</span>
+                  </div>
+
+                  <div className="absolute top-3 right-3 px-2.5 py-1 rounded-md bg-red-600/90 text-white font-space text-[10px] font-bold shadow-lg">
+                    <span>Peak Activation: 0.942</span>
                   </div>
                 </div>
+              </div>
 
-                <div className="p-2.5 rounded bg-blue-50 dark:bg-blue-950/40 border border-blue-500/20 font-space text-[10px] text-blue-700 dark:text-blue-300">
-                  💡 <strong>Pathologist Note:</strong> Explainable AI alignment with atypical keratinization provides high concordance with manual microscopic examination.
+              {/* Bottom Interactive Control Panel (Opacity + Blend Mode) */}
+              <div
+                className="p-3.5 rounded-xl border border-[var(--border-subtle)] flex flex-col sm:flex-row items-center justify-between gap-4 font-space text-xs"
+                style={{ background: "var(--bg-base)" }}
+              >
+                {/* Opacity Slider */}
+                <div className="flex items-center gap-3 w-full sm:w-auto flex-1 max-w-sm">
+                  <span className="font-semibold text-gray-700 dark:text-gray-300 whitespace-nowrap">
+                    Heatmap Opacity:
+                  </span>
+                  <input
+                    type="range"
+                    min="0"
+                    max="100"
+                    value={heatmapOpacity}
+                    onChange={(e) => setHeatmapOpacity(Number(e.target.value))}
+                    className="w-full accent-[#00c7b7] cursor-pointer h-1.5 bg-gray-700 rounded-lg"
+                  />
+                  <span className="font-mono font-bold text-[var(--accent-primary)] min-w-[40px] text-right">
+                    {heatmapOpacity}%
+                  </span>
+                </div>
+
+                {/* Blend Mode Dropdown */}
+                <div className="flex items-center gap-2.5 w-full sm:w-auto justify-end">
+                  <span className="font-semibold text-gray-700 dark:text-gray-300 whitespace-nowrap">
+                    Blend Mode:
+                  </span>
+                  <select
+                    value={blendMode}
+                    onChange={(e) => setBlendMode(e.target.value)}
+                    className="px-3 py-1.5 rounded-lg border border-[var(--border-subtle)] bg-[var(--bg-surface)] text-[var(--text-main)] font-space text-xs outline-none cursor-pointer focus:border-[var(--accent-primary)] font-medium"
+                  >
+                    <option value="normal">Normal</option>
+                    <option value="multiply">Multiply</option>
+                    <option value="screen">Screen</option>
+                    <option value="overlay">Overlay</option>
+                    <option value="color-dodge">Color Dodge</option>
+                    <option value="darken">Darken</option>
+                    <option value="lighten">Lighten</option>
+                    <option value="soft-light">Soft Light</option>
+                  </select>
+                </div>
+              </div>
+
+              {/* Footnote matching user specification */}
+              <p className="font-space text-[11px] text-gray-500 dark:text-gray-400 text-center leading-relaxed">
+                * Heatmap highlights deep features that contributed most heavily to the classification. Use opacity and blend controls to isolate core cell regions.
+              </p>
+            </div>
+
+            {/* Pathologist Diagnostic Interpretation Details */}
+            <div
+              className="p-4 rounded-xl border font-space text-xs space-y-3"
+              style={{ background: "var(--bg-surface)", borderColor: "var(--border-subtle)" }}
+            >
+              <div className="font-bold uppercase tracking-wider text-blue-500 text-[10px]">
+                NEURAL ACTIVATION &amp; CELLULAR LOCALIZATION SUMMARY
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-3 text-gray-700 dark:text-gray-300">
+                <div>
+                  <span className="text-[10px] text-gray-500 block uppercase">Neural Model:</span>
+                  <span className="font-bold">{currentCase.gradCamDetails.model}</span>
+                </div>
+                <div>
+                  <span className="text-[10px] text-gray-500 block uppercase">Cellular Features:</span>
+                  <p className="text-[11px] mt-0.5 leading-snug">{currentCase.gradCamDetails.cellularFeatures}</p>
+                </div>
+                <div>
+                  <span className="text-[10px] text-gray-500 block uppercase">Heatmap Focus:</span>
+                  <p className="text-[11px] mt-0.5 leading-snug text-amber-600 dark:text-amber-400 font-semibold">{currentCase.gradCamDetails.heatmapFocus}</p>
                 </div>
               </div>
             </div>
